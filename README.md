@@ -46,7 +46,7 @@ _Started: July 2026 | Last updated: 12 July 2026 | Commitment: 6–8 hours a wee
 
 - [x] Create the GitHub repo: `frontend-roadmap` — roadmap and weekly log live here, and every week's code gets pushed here too ✅ _(12 July 2026)_
 - [x] Get VS Code + Git ready ✅ _(already my daily tools)_
-- [ ] Start a "Learning Log" in a notebook or notes app. After every session, write 2 lines in your own words: what I learned today, what I did not understand. Writing it in your own words is the test — copying a definition does not count.
+- [x] Start a "Learning Log" in a notebook or notes app. After every session, write 2 lines in your own words: what I learned today, what I did not understand. Writing it in your own words is the test — copying a definition does not count.
 - [ ] Block 3–4 fixed slots in the calendar every week (for example: Mon/Wed/Fri, 1.5 hours at night + Sunday, 2 hours)
 
 **Why:** Without fixed time slots, "I will do it tomorrow" takes over. A calendar block is a commitment.
