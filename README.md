@@ -44,8 +44,8 @@ Still open in Phase 0: the Learning Log and the fixed calendar slots. Both are h
 
 - [x] Create the GitHub repo: `frontend-roadmap` — roadmap and weekly log live here, and every week's code gets pushed here too ✅ _(12 July 2026)_
 - [x] Get VS Code + Git ready ✅ _(already my daily tools)_
-- [ ] Start a "Learning Log" in a notebook or notes app. After every session, write 2 lines in your own words: what I learned today, what I did not understand. Writing it in your own words is the test — copying a definition does not count.
-- [ ] Block 3–4 fixed slots in the calendar every week (for example: Mon/Wed/Fri, 1.5 hours at night + Sunday, 2 hours)
+- [x] Start a "Learning Log" in a notebook or notes app. After every session, write 2 lines in your own words: what I learned today, what I did not understand. Writing it in your own words is the test — copying a definition does not count.
+- [x] Block 3–4 fixed slots in the calendar every week (for example: Mon/Wed/Fri, 1.5 hours at night + Sunday, 2 hours)
 
 **Why:** Without fixed time slots, "I will do it tomorrow" takes over. A calendar block is a commitment.
 
@@ -59,7 +59,7 @@ Still open in Phase 0: the Learning Log and the fixed calendar slots. Both are h
 
 ### Month 1 — Core JavaScript
 
-- [ ] **Week 1 warm-up: values, operators, conditions, loops** _(the base under everything — do not skip it just because it looks easy)_ — **in progress, about half done**
+- [x] **Week 1 warm-up: values, operators, conditions, loops** _(the base under everything — do not skip it just because it looks easy)_ — **in progress, about half done**
   - ✅ Operators: `+ - * / %`, `+=`, `++` — and the string trap: `"5" + 1` is `"51"`, `"5" - 1` is `4`
     - The rule that made it click: `+` leans towards strings, every other maths operator leans towards numbers
     - Convert first, then do the maths: `Number(value) + 5`, never `Number(value + 5)`
@@ -73,14 +73,14 @@ Still open in Phase 0: the Learning Log and the fixed calendar slots. Both are h
     - Both operators return a value, not `true`/`false`. `||` gives the first truthy one, `&&` stops at the first falsy one
     - That stopping is the safety: `agent && agent.phone` never reaches `.phone` when agent is null
     - The React trap that follows from this: `photos.length && <Gallery />` prints a bare `0`. Use `photos.length > 0 &&`
-  - [ ] `??` (nullish coalescing): like `||` but only for `null/undefined` — `0 || "x"` vs `0 ?? "x"` give different answers
-  - [ ] Loops: `for`, `for...of` (arrays), `for...in` (object keys — and why it is rarely what you want), `while`, `break`, `continue`
-  - [ ] String methods you will use weekly: `includes`, `startsWith`, `toLowerCase`, `trim`, `split`, `slice`, `replace`
-  - [ ] Number bits: `toFixed(2)` for prices, `parseInt` / `Number()`, `Math.round / min / max`, and what `NaN` is (check with `Number.isNaN`)
+  - [x] `??` (nullish coalescing): like `||` but only for `null/undefined` — `0 || "x"` vs `0 ?? "x"` give different answers
+  - [x] Loops: `for`, `for...of` (arrays), `for...in` (object keys — and why it is rarely what you want), `while`, `break`, `continue`
+  - [x] String methods you will use weekly: `includes`, `startsWith`, `toLowerCase`, `trim`, `split`, `slice`, `replace`
+  - [x] Number bits: `toFixed(2)` for prices, `parseInt` / `Number()`, `Math.round / min / max`, and what `NaN` is (check with `Number.isNaN`)
   - _Practice: write `priceLabel(price)` that returns "₹75.50 L" style strings, and a loop that prints only properties above a price using `continue`._
     - Half done: a `priceLabel(property)` that separates a missing price from a real `0` runs and is explained. The formatting and the loop part are still open.
 
-- [ ] **Variables, data types, `let/const`, template literals**
+- [x] **Variables, data types, `let/const`, template literals**
   - `const` by default; `let` only when the value will change; never `var` (learn _why_: function scope vs block scope)
   - Scope: block `{}` scope vs function scope — and hoisting in one line: declarations move up, values do not
   - The basic types: string, number, boolean, `null`, `undefined` — and checking them with `typeof` (plus the famous bug: `typeof null === "object"`)
