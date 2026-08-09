@@ -2,21 +2,22 @@
 
 > My personal 15-month roadmap: Senior UI Developer → Senior Frontend Developer. Updated weekly.
 
-_Started: July 2026 | Last updated: 27 July 2026 | Commitment: 6–8 hours a week | 📋 Weekly progress: [weekly-log.md](./weekly-log.md)_
+_Started: July 2026 | Last updated: 09 August 2026 | Commitment: 6–8 hours a week | 📋 Weekly progress: [weekly-log.md](./weekly-log.md)_
 
 ---
 
 ## PROGRESS SO FAR
 
-**Currently in: Phase 1 → Month 1 → Week 1 warm-up.**
+**Currently in: Phase 1 → Month 1 → Item 2 (variables and reference), nearly done.**
 
 Done so far:
 
 - Repo created, VS Code and Git ready (Phase 0)
 - Portfolio site built in HTML + Tailwind — ahead of schedule, not published yet
-- Week 1 warm-up, first half: type coercion, `==` vs `===`, truthy/falsy, and short-circuit with `||` and `&&`
-
-Still open in Week 1: `??`, loops, string methods, number methods.
+- **Week 1 warm-up: COMPLETE (09 Aug 2026)** — type coercion, `==` vs `===`, truthy/falsy, short-circuit, `??`, loops, string methods, number methods, and the full `priceLabel` practice task (Cr/L formatting, verified on 18 properties)
+- `properties.js` created — 18 property objects with deliberate traps (`price: 0`, `price: null`, missing keys, `agent: null`, empty `photos`), the shared data for every Month 1 task
+- Item 2, most of it: reference vs copy, `const`'s real meaning, shallow copy, spread update pattern, `applyDiscount` practice. Left: template literals in detail + `typeof`
+- Two real bugs found and fixed in office React code along the way: a stray `0` rendering from `length &&`, and a `filter(item => item && item.id)` that silently dropped a valid `id: 0`
 
 Still open in Phase 0: the Learning Log and the fixed calendar slots. Both are honest gaps, not finished work.
 
@@ -44,8 +45,8 @@ Still open in Phase 0: the Learning Log and the fixed calendar slots. Both are h
 
 - [x] Create the GitHub repo: `frontend-roadmap` — roadmap and weekly log live here, and every week's code gets pushed here too ✅ _(12 July 2026)_
 - [x] Get VS Code + Git ready ✅ _(already my daily tools)_
-- [x] Start a "Learning Log" in a notebook or notes app. After every session, write 2 lines in your own words: what I learned today, what I did not understand. Writing it in your own words is the test — copying a definition does not count.
-- [x] Block 3–4 fixed slots in the calendar every week (for example: Mon/Wed/Fri, 1.5 hours at night + Sunday, 2 hours)
+- [ ] Start a "Learning Log" in a notebook or notes app. After every session, write 2 lines in your own words: what I learned today, what I did not understand. Writing it in your own words is the test — copying a definition does not count.
+- [ ] Block 3–4 fixed slots in the calendar every week (for example: Mon/Wed/Fri, 1.5 hours at night + Sunday, 2 hours)
 
 **Why:** Without fixed time slots, "I will do it tomorrow" takes over. A calendar block is a commitment.
 
@@ -59,7 +60,7 @@ Still open in Phase 0: the Learning Log and the fixed calendar slots. Both are h
 
 ### Month 1 — Core JavaScript
 
-- [x] **Week 1 warm-up: values, operators, conditions, loops** _(the base under everything — do not skip it just because it looks easy)_ — **in progress, about half done**
+- [x] **Week 1 warm-up: values, operators, conditions, loops** ✅ _(completed 09 Aug 2026)_
   - ✅ Operators: `+ - * / %`, `+=`, `++` — and the string trap: `"5" + 1` is `"51"`, `"5" - 1` is `4`
     - The rule that made it click: `+` leans towards strings, every other maths operator leans towards numbers
     - Convert first, then do the maths: `Number(value) + 5`, never `Number(value + 5)`
@@ -78,14 +79,14 @@ Still open in Phase 0: the Learning Log and the fixed calendar slots. Both are h
   - [x] String methods you will use weekly: `includes`, `startsWith`, `toLowerCase`, `trim`, `split`, `slice`, `replace`
   - [x] Number bits: `toFixed(2)` for prices, `parseInt` / `Number()`, `Math.round / min / max`, and what `NaN` is (check with `Number.isNaN`)
   - _Practice: write `priceLabel(price)` that returns "₹75.50 L" style strings, and a loop that prints only properties above a price using `continue`._
-    - Half done: a `priceLabel(property)` that separates a missing price from a real `0` runs and is explained. The formatting and the loop part are still open.
+    - ✅ Done: the final `priceLabel(property)` handles a missing price, a real `0`, and Cr/L formatting with the unit decided in one place — verified against all 18 properties. The `continue` loop task also runs.
 
-- [x] **Variables, data types, `let/const`, template literals**
+- [ ] **Variables, data types, `let/const`, template literals** — **nearly done; left: template literals in detail + `typeof`**
   - `const` by default; `let` only when the value will change; never `var` (learn _why_: function scope vs block scope)
   - Scope: block `{}` scope vs function scope — and hoisting in one line: declarations move up, values do not
   - The basic types: string, number, boolean, `null`, `undefined` — and checking them with `typeof` (plus the famous bug: `typeof null === "object"`)
-  - Arrays and objects are copied _by reference_, not by value — this one causes real bugs, slow down here
-  - Shallow copy vs deep copy: spread `{...obj}` copies one level only; nested objects inside are still shared (`structuredClone` for a true deep copy)
+  - ✅ Arrays and objects are copied _by reference_, not by value — this one causes real bugs, slow down here
+  - ✅ Shallow copy vs deep copy: spread `{...obj}` copies one level only; nested objects inside are still shared (`structuredClone` for a true deep copy)
   - Template literals: `` `${price}` `` instead of string + string; also multi-line strings and expressions inside `${}`
   - _Practice: write a function that takes a property object and returns a card string like "3 BHK in Noida — ₹75 L". Change one value, run again. Then copy a property with spread, change the copy's nested field, and check the original — see the shallow-copy surprise yourself._
 
