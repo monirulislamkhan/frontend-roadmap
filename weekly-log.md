@@ -9,15 +9,16 @@
 
 ```
 ## Week of [DD Month YYYY] — Phase [N]
-- **Kya kiya:** 
-- **Kya seekha:** 
-- **Kahan atka:** 
-- **Agle hafte:** 
+- **Kya kiya:**
+- **Kya seekha:**
+- **Kahan atka:**
+- **Agle hafte:**
 ```
 
 ---
 
 ## Week of 13 July 2026 — Phase 0
+
 - **Kya kiya:** Roadmap repo banaya, GitHub pe push kiya. Calendar mein study slots block kiye.
 - **Kya seekha:** Repo create karna, README push karna.
 - **Kahan atka:** —
