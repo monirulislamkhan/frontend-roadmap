@@ -276,16 +276,15 @@ const objList = [
 const mappedList = objList.filter((item) => item && item.id);
 // console.log(mappedList);
 
-const list = [{ id: 1, name: 'Skyline' }, null, { name: 'No ID' }, { id: 0, name: 'Plot 42' }];
+/* const list = [{ id: 1, name: 'Skyline' }, null, { name: 'No ID' }, { id: 0, name: 'Plot 42' }];
+console.log(list.filter(item => item  !=null && item.id != null)); */
 
-// console.log(list.filter(item => item  !=null && item.id != null));
-
-const property = { name: 'Skyline Towers', price: 7500000, bhk: 3 };
+/* const property = { name: 'Skyline Towers', price: 7500000, bhk: 3 };
 
 function applyDiscount(property, percent) {
   const newPrice = property.price - (property.price * percent) / 100;
   return { ...property, price: newPrice };
-}
+} */
 
 // console.log(applyDiscount(property, 10));
 // console.log(property)
@@ -318,7 +317,17 @@ console.log(p1 ?? 'Not found'); */
 const totalPriceShort = properties.reduce((sum, property) => sum + (property.price ?? 0), 0);
 console.log(totalPrice);
 console.log(totalPriceShort); */
+/* const prices = [...properties.map((p) => p.price ?? 0)];
+const asndPrice = prices.sort((a, b) => a - b);
+console.log(asndPrice); */
 
-const prices = [7500000, 4200000, 25000000, 950000];
-// console.log(prices.sort());
-console.log(prices.sort());
+// const areas = [1450, 980, 2000, 520];
+// console.log(areas.sort((a, b) => a - b)) // smaller first (ascending)
+
+const cheapFivePropertiesInNoida = properties
+  .filter((item) => item.city === 'Noida' && item.price !== null)
+  .sort((a, b) => (a.price ?? 0) - (b.price ?? 0))
+  .slice(0, 5)
+  .map((item) => item.name);
+
+console.log(cheapFivePropertiesInNoida);
