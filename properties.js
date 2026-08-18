@@ -236,6 +236,19 @@ const properties = [
     photos: ['a.jpg'],
     agent: null,
   },
+  {
+    id: 19,
+    name: 'Warehouse Unit 4',
+    city: 'Noida',
+    price: null,
+    bhk: 2,
+    area: 6500,
+    type: 'warehouse',
+    status: 'sale',
+    postedOn: '2026-04-27',
+    photos: ['a.jpg'],
+    agent: null,
+  },
 ];
 
 function priceLabel(property) {
@@ -341,8 +354,12 @@ const firstProperty1 = properties.filter((item) => item.price).sort((a, b) => a.
 
 console.log(firstProperty);
 console.log(firstProperty1); */
-const priceFiltered = properties.filter((item) => item.price);
+/* const priceFiltered = properties.filter((item) => item.price);
 const totalPrice = priceFiltered.reduce((sum, item) => sum + item.price, 0);
 const average = totalPrice / priceFiltered.length;
 const averagePrice = priceLabel({ price: average });
-console.log(average, averagePrice);
+console.log(average, averagePrice); */
+const noidaTwoBhkProperty = properties
+  .filter((item) => item.city === 'Noida' && item.bhk === 2)
+  .sort((a, b) => a.price - b.price);
+console.log(noidaTwoBhkProperty);
