@@ -242,11 +242,7 @@ function priceLabel(property) {
   const lakhs = 100000;
   const cr = 10000000;
 
-  if (property.price === 0) {
-    return 'Free Property';
-  }
-
-  if (property.price == null) {
+  if (property.price == null || property.price === 0) {
     return 'Price on request';
   }
 
@@ -269,11 +265,11 @@ function priceLabel(property) {
 // copy.price = 9000000;
 // console.log(property.price);
 
-const objList = [
+/* const objList = [
   { id: 1, name: 'Skyline' },
   { id: 2, name: 'Rose Court' },
 ];
-const mappedList = objList.filter((item) => item && item.id);
+const mappedList = objList.filter((item) => item && item.id); */
 // console.log(mappedList);
 
 /* const list = [{ id: 1, name: 'Skyline' }, null, { name: 'No ID' }, { id: 0, name: 'Plot 42' }];
@@ -324,10 +320,29 @@ console.log(asndPrice); */
 // const areas = [1450, 980, 2000, 520];
 // console.log(areas.sort((a, b) => a - b)) // smaller first (ascending)
 
-const cheapFivePropertiesInNoida = properties
+/* const cheapFivePropertiesInNoida = properties
   .filter((item) => item.city === 'Noida' && item.price !== null)
   .sort((a, b) => (a.price ?? 0) - (b.price ?? 0))
   .slice(0, 5)
   .map((item) => item.name);
 
-console.log(cheapFivePropertiesInNoida);
+console.log(cheapFivePropertiesInNoida); */
+
+/* const firstProperty = properties.[0];
+const speard = [...firstProperty];
+console.log(firstProperty); */
+/* const firstProperty = properties[0];
+console.log(firstProperty); */
+/* const firstProperty = properties.filter((item) => item.price != null).sort((a, b) => a.price - b.price)[0]; */
+/* const firstProperty = properties
+  .filter((item) => item.price != null && item.price != 0)
+  .sort((a, b) => a.price - b.price)[0];
+const firstProperty1 = properties.filter((item) => item.price).sort((a, b) => a.price - b.price)[0];
+
+console.log(firstProperty);
+console.log(firstProperty1); */
+const priceFiltered = properties.filter((item) => item.price);
+const totalPrice = priceFiltered.reduce((sum, item) => sum + item.price, 0);
+const average = totalPrice / priceFiltered.length;
+const averagePrice = priceLabel({ price: average });
+console.log(average, averagePrice);
