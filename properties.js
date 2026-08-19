@@ -240,7 +240,7 @@ const properties = [
     id: 19,
     name: 'Warehouse Unit 4',
     city: 'Noida',
-    price: null,
+    price: 0,
     bhk: 2,
     area: 6500,
     type: 'warehouse',
@@ -359,7 +359,14 @@ const totalPrice = priceFiltered.reduce((sum, item) => sum + item.price, 0);
 const average = totalPrice / priceFiltered.length;
 const averagePrice = priceLabel({ price: average });
 console.log(average, averagePrice); */
-const noidaTwoBhkProperty = properties
-  .filter((item) => item.city === 'Noida' && item.bhk === 2)
+/* const noidaTwoBhkProperty = properties
+  .filter((item) => item.city === 'Noida' && item.bhk === 2 && item.price)
   .sort((a, b) => a.price - b.price);
-console.log(noidaTwoBhkProperty);
+console.log(noidaTwoBhkProperty); */
+/* const findIdWiseProperty = properties.find((item) => item.id === 15)?.name ?? 'Property not found';
+console.log(findIdWiseProperty); */
+/* const someAsk = properties.some((item) => item.city === 'Mumbai');
+console.log(someAsk);
+const isAllPriceAvailable = properties.every((item) => item.price);
+const isAllPhotoAvailable = properties.every((item) => item.photos);
+console.log(isAllPriceAvailable, isAllPhotoAvailable); */
