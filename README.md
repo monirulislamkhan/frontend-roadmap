@@ -2,22 +2,34 @@
 
 > My personal 15-month roadmap: Senior UI Developer → Senior Frontend Developer. Updated weekly.
 
-_Started: July 2026 | Last updated: 09 August 2026 | Commitment: 6–8 hours a week | 📋 Weekly progress: [weekly-log.md](./weekly-log.md)_
+_Started: July 2026 | Last updated: 13 August 2026 | Commitment: 6–8 hours a week_
 
 ---
 
 ## PROGRESS SO FAR
 
-**Currently in: Phase 1 → Month 1 → Item 2 (variables and reference), nearly done.**
+**Currently in: Phase 1 → Month 1 → Item 4 (Objects). Three of the seven Month 1 items are done.**
 
 Done so far:
 
 - Repo created, VS Code and Git ready (Phase 0)
-- Portfolio site built in HTML + Tailwind — ahead of schedule, not published yet
-- **Week 1 warm-up: COMPLETE (09 Aug 2026)** — type coercion, `==` vs `===`, truthy/falsy, short-circuit, `??`, loops, string methods, number methods, and the full `priceLabel` practice task (Cr/L formatting, verified on 18 properties)
-- `properties.js` created — 18 property objects with deliberate traps (`price: 0`, `price: null`, missing keys, `agent: null`, empty `photos`), the shared data for every Month 1 task
-- Item 2, most of it: reference vs copy, `const`'s real meaning, shallow copy, spread update pattern, `applyDiscount` practice. Left: template literals in detail + `typeof`
-- Two real bugs found and fixed in office React code along the way: a stray `0` rendering from `length &&`, and a `filter(item => item && item.id)` that silently dropped a valid `id: 0`
+- **Portfolio site is live** — `monirulislamkhan.github.io`, hand-written HTML + Tailwind, no JS framework
+- `properties.js` created — 18 property objects with deliberate traps (`price: 0`, `price: null`, a missing `price` key, `agent: null`, empty `photos`). Every Month 1 practice task runs on this one file.
+- **Week 1 warm-up: complete (09 Aug)** — type coercion, `==` vs `===`, truthy/falsy, short-circuit, `??`, loops, string methods, number methods, and the full `priceLabel` task with Cr/L formatting
+- **Item 2 — variables and reference: complete (12 Aug)** — reference vs copy, what `const` actually protects, shallow copy, the spread update pattern, template literals, `typeof`
+- **Item 3 — arrays: complete (13 Aug)** — `map`, `filter`, `find`, `reduce`, `sort`, `some`, `every`, `slice`, and all four practice tasks
+
+Two real bugs found and fixed in office React code along the way:
+
+- A stray `0` rendering from `length && <Component />` — `&&` returns the value, not a boolean, and React prints numbers
+- A `filter(item => item && item.id)` that silently dropped a valid listing with `id: 0`
+
+Some rules that came out of the practice and now apply everywhere:
+
+- Whether `0` is valid depends on the field, not on the code — a `price` of 0 is bad data, a `bhk` of 0 is a plot
+- Write a decision once, in one place. The same condition written twice will drift apart.
+- Clean bad data at the start of a chain, then the rest of the code needs no guards. An unnecessary guard makes code look unsure of itself.
+- Never put a dot straight after `find()` — `?.` first, then `??`
 
 Still open in Phase 0: the Learning Log and the fixed calendar slots. Both are honest gaps, not finished work.
 
@@ -43,9 +55,9 @@ Still open in Phase 0: the Learning Log and the fixed calendar slots. Both are h
 
 **To do:**
 
-- [x] Create the GitHub repo: `frontend-roadmap` — roadmap and weekly log live here, and every week's code gets pushed here too ✅ _(12 July 2026)_
+- [x] Create the GitHub repo: `frontend-roadmap` — this roadmap lives here, and every week's practice code gets pushed here too ✅ _(12 July 2026)_
 - [x] Get VS Code + Git ready ✅ _(already my daily tools)_
-- [ ] Start a "Learning Log" in a notebook or notes app. After every session, write 2 lines in your own words: what I learned today, what I did not understand. Writing it in your own words is the test — copying a definition does not count.
+- [ ] Start a "Learning Log" in a notebook or notes app (kept private, not in this repo). After every session, write 2 lines in your own words: what I learned today, what I did not understand. Writing it in your own words is the test — copying a definition does not count.
 - [ ] Block 3–4 fixed slots in the calendar every week (for example: Mon/Wed/Fri, 1.5 hours at night + Sunday, 2 hours)
 
 **Why:** Without fixed time slots, "I will do it tomorrow" takes over. A calendar block is a commitment.
@@ -81,16 +93,22 @@ Still open in Phase 0: the Learning Log and the fixed calendar slots. Both are h
   - _Practice: write `priceLabel(price)` that returns "₹75.50 L" style strings, and a loop that prints only properties above a price using `continue`._
     - ✅ Done: the final `priceLabel(property)` handles a missing price, a real `0`, and Cr/L formatting with the unit decided in one place — verified against all 18 properties. The `continue` loop task also runs.
 
-- [ ] **Variables, data types, `let/const`, template literals** — **nearly done; left: template literals in detail + `typeof`**
+- [x] **Variables, data types, `let/const`, template literals** ✅ _(completed 12 Aug 2026)_
   - `const` by default; `let` only when the value will change; never `var` (learn _why_: function scope vs block scope)
   - Scope: block `{}` scope vs function scope — and hoisting in one line: declarations move up, values do not
-  - The basic types: string, number, boolean, `null`, `undefined` — and checking them with `typeof` (plus the famous bug: `typeof null === "object"`)
+  - ✅ The basic types: string, number, boolean, `null`, `undefined` — and checking them with `typeof` (plus the famous bug: `typeof null === "object"`)
+    - `typeof [] === "object"` too — an array *is* an object underneath, with number keys and an automatic `length`. So the reference-copy rule applies to arrays as well, and spread works on both: `{...obj}` and `[...arr]`.
+    - Which check to use: `typeof` for primitives, `Array.isArray()` for arrays, `== null` for "is it missing"
+
   - ✅ Arrays and objects are copied _by reference_, not by value — this one causes real bugs, slow down here
   - ✅ Shallow copy vs deep copy: spread `{...obj}` copies one level only; nested objects inside are still shared (`structuredClone` for a true deep copy)
-  - Template literals: `` `${price}` `` instead of string + string; also multi-line strings and expressions inside `${}`
+  - ✅ Template literals: `` `${price}` `` instead of string + string; also multi-line strings and expressions inside `${}`
+    - Anything can go inside `${}` — a variable, maths, a ternary, even a function call
+    - Keep a whole decision inside one `${}`, or a stray `0` leaks out beside it
   - _Practice: write a function that takes a property object and returns a card string like "3 BHK in Noida — ₹75 L". Change one value, run again. Then copy a property with spread, change the copy's nested field, and check the original — see the shallow-copy surprise yourself._
+    - ✅ Done. The card line asks `bhk > 0 ? bhk + " BHK" : type`, so plots, shops, offices and warehouses all handle themselves instead of being listed one by one. `applyDiscount` returns a new object and leaves the original untouched.
 
-- [ ] **Arrays, deeply: `map`, `filter`, `reduce`, `find`, `some`, `every`, `sort`**
+- [x] **Arrays, deeply: `map`, `filter`, `reduce`, `find`, `some`, `every`, `sort`** ✅ _(completed 13 Aug 2026)_
   - `map` = transform every item into something new (property objects → price strings)
   - `filter` = keep only the items that pass a test (only Noida, only under ₹50 L)
   - `reduce` = turn a whole array into one value (total value, average price, count per city) — learn the shape: `(accumulator, item) => ...`, plus the starting value
@@ -100,6 +118,9 @@ Still open in Phase 0: the Learning Log and the fixed calendar slots. Both are h
   - `includes`, `indexOf`, `slice` (copy a part) vs `splice` (cut the original — avoid), `concat`, `reverse`, `join`
   - Chaining: `properties.filter(...).map(...)` — read it left to right like a sentence
   - _Practice: from your properties array, get (1) the cheapest property, (2) the average price, (3) only 2 BHK in one city, sorted low to high, (4) total value of all listings. No loops allowed — only these methods._
+    - ✅ All four done. Cheapest is a full object, so the chain ends in `[0]` rather than `slice(0, 1)`. Average filters the priceless listings out first and divides by that count, not by 18.
+    - What `sort` taught me: `7500000 - null` becomes `7500000 - 0`, so a listing with no price looks like the cheapest one on the page. And `- undefined` gives `NaN`, which makes the order unreliable. Filtering those out beats patching them with `?? 0`.
+    - `arr.length > 0`, never `if (arr)` — an empty array is truthy, so `every(p => p.photos)` says yes even when four listings have no photos at all.
 
 - [ ] **Objects: destructuring, spread `...`, optional chaining `?.`**
   - Destructuring: `const { price, city } = property;` — also with rename (`price: cost`) and default values (`agent = "N/A"`)
@@ -614,7 +635,7 @@ The test is simple: explain it out loud, then do it, without help. **All four "y
 
 ## PARALLEL TRACK (all 15 months, alongside everything)
 
-- [x] **Portfolio site** — ✅ built (July 2026, HTML + Tailwind — ahead of schedule!). Still left: **publishing** (screenshots + resume.pdf + GitHub Pages). After Phase 4, the v2 rebuild in React/Next.
+- [x] **Portfolio site** — ✅ built and **live** at `monirulislamkhan.github.io` (August 2026, hand-written HTML + Tailwind). Optional later: project screenshots. After Phase 4, the v2 rebuild in React/Next.
 - [ ] **Ask for React/Next work at the office** — real work is the strongest resume proof there is
 - [ ] **Use AI tools daily** (Claude Code / Copilot / Cursor) — for speed at work, for explanations while learning
 - [ ] **Last Sunday of every month:** open this file, tick the boxes, read next month's plan
