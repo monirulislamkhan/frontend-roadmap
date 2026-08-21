@@ -326,6 +326,7 @@ console.log(p1 ?? 'Not found'); */
 const totalPriceShort = properties.reduce((sum, property) => sum + (property.price ?? 0), 0);
 console.log(totalPrice);
 console.log(totalPriceShort); */
+
 /* const prices = [...properties.map((p) => p.price ?? 0)];
 const asndPrice = prices.sort((a, b) => a - b);
 console.log(asndPrice); */
@@ -344,9 +345,12 @@ console.log(cheapFivePropertiesInNoida); */
 /* const firstProperty = properties.[0];
 const speard = [...firstProperty];
 console.log(firstProperty); */
+
 /* const firstProperty = properties[0];
 console.log(firstProperty); */
+
 /* const firstProperty = properties.filter((item) => item.price != null).sort((a, b) => a.price - b.price)[0]; */
+
 /* const firstProperty = properties
   .filter((item) => item.price != null && item.price != 0)
   .sort((a, b) => a.price - b.price)[0];
@@ -354,19 +358,71 @@ const firstProperty1 = properties.filter((item) => item.price).sort((a, b) => a.
 
 console.log(firstProperty);
 console.log(firstProperty1); */
+
 /* const priceFiltered = properties.filter((item) => item.price);
 const totalPrice = priceFiltered.reduce((sum, item) => sum + item.price, 0);
 const average = totalPrice / priceFiltered.length;
 const averagePrice = priceLabel({ price: average });
 console.log(average, averagePrice); */
+
 /* const noidaTwoBhkProperty = properties
   .filter((item) => item.city === 'Noida' && item.bhk === 2 && item.price)
   .sort((a, b) => a.price - b.price);
 console.log(noidaTwoBhkProperty); */
+
 /* const findIdWiseProperty = properties.find((item) => item.id === 15)?.name ?? 'Property not found';
 console.log(findIdWiseProperty); */
+
 /* const someAsk = properties.some((item) => item.city === 'Mumbai');
 console.log(someAsk);
 const isAllPriceAvailable = properties.every((item) => item.price);
 const isAllPhotoAvailable = properties.every((item) => item.photos);
 console.log(isAllPriceAvailable, isAllPhotoAvailable); */
+
+/* function getPage(pageNumber) {
+  const perPage = 6;
+  const start = (pageNumber - 1) * perPage;
+  // console.log(start);
+  // console.log(properties.slice(start, perPage));
+  return console.log(properties.slice(start, start + perPage));
+}
+
+// getPage(1);
+getPage(2); */
+
+/* const property = { name: 'Skyline Towers', city: 'Noida', price: 7500000, bhk: 3 };
+
+// const { bhk, price } = property;
+const { status = 'Sale' } = property;
+console.log(property); */
+
+/* // const shop = { name: 'Shop 3', agent: { name: 'Rahul', phone: '9810011111' } };
+const shop = { name: 'Shop 3', agent: null };
+// const { name, agent } = shop;
+const phone = agent?.phone ?? 'Not Available';
+const agentName = agent?.name ?? 'No Agent';
+
+// const { name, agent: { phone, name: agentName } = {} } = shop;
+// console.log(name, phone, agentName);
+// console.log(name, agentName, phone); */
+
+/* const plot = properties.find((property) => property.id === 3);
+const skyline = properties.find((item) => item.id === 1);
+// const { name, agent } = skyline;
+
+function agentPhone(property) {
+  const { name, agent } = property;
+  const phone = agent?.phone ?? 'Not Available';
+  const agentName = agent?.name ?? 'No Agent';
+  return `Name is ${name}, Phone no.:${phone} and Agent name is ${agentName}`;
+}
+
+console.log(agentPhone(plot));
+console.log(agentPhone(skyline));
+
+console.log(plot, skyline);
+// console.log(name, agent); */
+
+const p = { id: 3, name: 'Plot 42', city: 'Ghaziabad', price: 0, bhk: 0 };
+const objectCount = Object.keys(p).length;
+console.log(objectCount);
