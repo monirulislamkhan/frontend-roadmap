@@ -423,6 +423,67 @@ console.log(agentPhone(skyline));
 console.log(plot, skyline);
 // console.log(name, agent); */
 
-const p = { id: 3, name: 'Plot 42', city: 'Ghaziabad', price: 0, bhk: 0 };
-const objectCount = Object.keys(p).length;
-console.log(objectCount);
+/*const p = { id: 3, name: 'Plot 42', city: 'Ghaziabad', price: 0, bhk: 0 };
+const objectCount = Object.entries(p).map(([key, value]) => `${key}: ${value}`)
+console.log(objectCount);*/
+
+/*const p = { city: "Noida", price: 7500000 };
+const objectArray = Object.entries(p).map(([key, value]) => `${key[0].toUpperCase() + key.slice(1)} : ${value}`)
+console.log(objectArray)*/
+
+/*const city = "Noida"
+const right = {[city]:5}
+console.log(right)*/
+
+/*const cityName = "Gurgaon";
+const total = 5;
+const final = {[cityName]:total};
+console.log(final)*/
+
+/*const property = {name:"Skyline Towers", price:7500000 }
+
+for (const key in property){
+  console.log(property[key])
+}*/
+
+/*const field1 = "price";
+const field2 = "bhk";
+const newValue = 5000000;
+
+console.log({[field1]:newValue});
+console.log({[field2]:newValue});*/
+
+/*const property = { id: 1, name: "Skyline Towers", city: "Noida", price: 7500000, bhk: 3 };
+
+const {id, ...rest} = property
+console.log(id, rest);*/
+
+/* const cardData = properties.map((item) => {
+  return {
+    name: item.name,
+  };
+});
+
+console.log(cardData); */
+
+/* const a = properties.map((p) => {
+  p.name;
+});
+
+const b = properties.map((p) => ({ label: p.name }));
+const c = properties.map((p) => {
+  return { label: p.name };
+});
+console.log(a);
+console.log(b);
+console.log(c); */
+
+/* const p = { name: 'skyline Tower' };
+function showName(property) {
+  console.log(property.name);
+}
+// setTimeout(() => showName, 1000);
+setTimeout(() => showName(p), 1000);
+ */
+
+function myFilter(array, testFn) {}
