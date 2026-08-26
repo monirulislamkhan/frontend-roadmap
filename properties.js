@@ -236,19 +236,6 @@ const properties = [
     photos: ['a.jpg'],
     agent: null,
   },
-  {
-    id: 19,
-    name: 'Warehouse Unit 4',
-    city: 'Noida',
-    price: 0,
-    bhk: 2,
-    area: 6500,
-    type: 'warehouse',
-    status: 'sale',
-    postedOn: '2026-04-27',
-    photos: ['a.jpg'],
-    agent: null,
-  },
 ];
 
 function priceLabel(property) {
@@ -486,4 +473,66 @@ function showName(property) {
 setTimeout(() => showName(p), 1000);
  */
 
-function myFilter(array, testFn) {}
+/* function runIt(fn) {
+  return fn(5);
+}
+const sayHi = (n) => n * 2;
+
+const res = runIt(sayHi);
+console.log(runIt(sayHi)); */
+
+/* function runIt(fn) {
+  return fn(5);
+}
+const isBig = (n) => n > 3;
+const ans = runIt(isBig);
+console.log(ans); */
+
+/* function myFilter(array, testFn) {
+  const result = [];
+  for (const item of array) {
+    if (testFn(item)) {
+      result.push(item);
+    }
+  }
+  return result;
+}
+
+// test:
+const res = myFilter(properties, (p) => p.city === 'Gurgaon');
+// console.log(res); */
+
+/* // normal function
+// const property = {
+//   name: 'Skyline Towers',
+//   city: 'Noida',
+//   showName: function () {
+//     console.log(this.name);
+//   },
+// };
+
+// arrow function
+const property = {
+  name: 'Skyline Towers',
+  city: 'Noida',
+  showName: () => {
+    console.log(this.name);
+  },
+};
+
+// property.showName();
+// const fn = property.showName();
+// fn(); */
+
+/* const property = {
+  name: 'Skyline Towers',
+  city: 'Noida',
+  showLate: function () {
+    setTimeout(function () {
+      console.log(this.name);
+    }, 1000);
+  },
+};
+property.showLate(); */
+
+// (), {}, [], ?
