@@ -1,3 +1,4 @@
+'use strict';
 // app.js — DOM practice
 // properties.js is loaded before this file, so `properties` is available here.
 // Write everything below yourself. One step at a time.
@@ -6,17 +7,22 @@
 // Grab #search, listen for the right event, log what the user typed.
 const search = document.querySelector('#search');
 search.addEventListener('input', function (event) {
-  console.log(event.target);
-  console.log(event.type);
+  // console.log(event.target);
+  // console.log(event.type);
 });
 
 const listing = document.querySelector('#listing');
-console.log(listing);
 
 function renderCards(list) {
-  return list;
+  listing.innerHTML = list.map(
+    (item) => `
+    <div class="card" data-id=${item.id}>
+      <h3>${item.name}</h3>
+      <p class="meta">${item.bhk > 0 ? item.bhk + ' BHK' : item.type} in ${item.city}</p>
+      <span class="price">${priceLabel(item)}</span>
+    </div>`
+  );
 }
-
 renderCards(properties);
 
 // STEP 2 — render the cards

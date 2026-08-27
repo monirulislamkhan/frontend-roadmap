@@ -252,13 +252,12 @@ function priceLabel(property) {
   } else {
     finalPrice = `${(property.price / lakhs).toFixed(2)} L`;
   }
-
   return `₹ ${finalPrice}`;
 }
 
-// for (const property of properties){
-//   // console.log(property.name, priceLabel(property))
-// }
+/* for (const property of properties) {
+  console.log(priceLabel(property));
+} */
 
 // const property = {name:"Skyline Towers", price:7500000 }
 // const copy = property;
@@ -285,10 +284,10 @@ function applyDiscount(property, percent) {
 // console.log(applyDiscount(property, 10));
 // console.log(property)
 
-/* for (const property of properties) {
+for (const property of properties) {
   const printResult = `${property.bhk > 0 ? property.bhk + ' BHK' : property.type[0].toUpperCase() + property.type.slice(1)} in ${property.city} - ${priceLabel(property)}`;
   // console.log(printResult);
-} */
+}
 
 // const p = properties[0];
 // console.log(p)
