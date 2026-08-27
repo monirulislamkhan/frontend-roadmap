@@ -238,26 +238,26 @@ const properties = [
   },
 ];
 
-function priceLabel(property) {
+function priceLabel(price) {
   const lakhs = 100000;
   const cr = 10000000;
 
-  if (property.price == null || property.price === 0) {
+  if (price == null || price === 0) {
     return 'Price on request';
   }
 
   let finalPrice;
-  if (property.price >= cr) {
-    finalPrice = `${(property.price / cr).toFixed(2)} Cr`;
+  if (price >= cr) {
+    finalPrice = `${(price / cr).toFixed(2)} Cr`;
   } else {
-    finalPrice = `${(property.price / lakhs).toFixed(2)} L`;
+    finalPrice = `${(price / lakhs).toFixed(2)} L`;
   }
   return `₹ ${finalPrice}`;
 }
 
-/* for (const property of properties) {
-  console.log(priceLabel(property));
-} */
+for (const property of properties) {
+  console.log(priceLabel(property.price));
+}
 
 // const property = {name:"Skyline Towers", price:7500000 }
 // const copy = property;

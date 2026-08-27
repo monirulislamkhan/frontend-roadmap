@@ -19,7 +19,7 @@ function renderCards(list) {
     <div class="card" data-id=${item.id}>
       <h3>${item.name}</h3>
       <p class="meta">${item.bhk > 0 ? item.bhk + ' BHK' : item.type} in ${item.city}</p>
-      <span class="price">${priceLabel(item)}</span>
+      <span class="price">${priceLabel(item.price)}</span>
     </div>`
   );
 }
