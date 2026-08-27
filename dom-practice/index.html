@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DOM Practice — Property Listing</title>
+    <style>
+      :root {
+        --bg: #faf9f7;
+        /* --bg: #151515; */
+        --text: #141210;
+        --muted: #6b6660;
+        --line: #e4e0da;
+        --card: #ffffff;
+        --accent: #d99a4e;
+      }
+
+      body.dark {
+        --bg: #141210;
+        --text: #f5f2ed;
+        --muted: #9c958b;
+        --line: #2c2823;
+        --card: #1c1916;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 32px 20px;
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+
+      .wrap {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        font-size: 22px;
+        margin: 0 0 24px;
+      }
+
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 24px;
+      }
+
+      #search {
+        flex: 1;
+        min-width: 220px;
+        padding: 10px 14px;
+        font: inherit;
+        color: var(--text);
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+      }
+
+      .filter,
+      #theme {
+        padding: 9px 16px;
+        font: inherit;
+        font-size: 14px;
+        color: var(--text);
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      /* toggle this class from JS — do not write styles in JS */
+      .filter.active {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #141210;
+      }
+
+      #listing {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 14px;
+      }
+
+      .card {
+        padding: 16px;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      .card.selected {
+        border-color: var(--accent);
+      }
+
+      .card h3 {
+        margin: 0 0 6px;
+        font-size: 15px;
+      }
+
+      .card .meta {
+        margin: 0 0 10px;
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .card .price {
+        font-size: 15px;
+        font-weight: 600;
+      }
+
+      .empty {
+        color: var(--muted);
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Property Listing</h1>
+
+      <div class="controls">
+        <input type="text" id="search" placeholder="Search properties" />
+        <button class="filter" data-city="all">All</button>
+        <button class="filter" data-city="Noida">Noida</button>
+        <button class="filter" data-city="Gurgaon">Gurgaon</button>
+        <button class="filter" data-city="Ghaziabad">Ghaziabad</button>
+        <button class="filter" data-city="Delhi">Delhi</button>
+        <button id="theme">Dark</button>
+      </div>
+
+      <div id="listing"></div>
+    </div>
+
+    <script src="properties.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
