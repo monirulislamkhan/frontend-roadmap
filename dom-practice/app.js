@@ -7,21 +7,28 @@
 // Grab #search, listen for the right event, log what the user typed.
 const search = document.querySelector('#search');
 search.addEventListener('input', function (event) {
-  // console.log(event.target);
-  // console.log(event.type);
+  const text = event.target.value.toLowerCase();
+  const found = properties.filter((item) => item.name.toLowerCase().includes(text));
+  renderCards(found);
 });
 
 const listing = document.querySelector('#listing');
 
 function renderCards(list) {
-  listing.innerHTML = list.map(
-    (item) => `
-    <div class="card" data-id=${item.id}>
+  if (!list.length) {
+    listing.innerHTML = '<p class="empty">No properties found</p>';
+    return;
+  }
+  listing.innerHTML = list
+    .map(
+      (item) => `
+    <div class="card" data-id="${item.id}">
       <h3>${item.name}</h3>
       <p class="meta">${item.bhk > 0 ? item.bhk + ' BHK' : item.type} in ${item.city}</p>
       <span class="price">${priceLabel(item.price)}</span>
     </div>`
-  );
+    )
+    .join('');
 }
 renderCards(properties);
 

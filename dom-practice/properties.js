@@ -1,3 +1,4 @@
+'use strict';
 // properties.js — shared practice data for Phase 1
 // 18 properties. Reuse this file for every Month 1 practice task.
 // Month 3 note: add `export` here once ES6 modules are covered.
@@ -255,9 +256,9 @@ function priceLabel(price) {
   return `₹ ${finalPrice}`;
 }
 
-for (const property of properties) {
+/* for (const property of properties) {
   console.log(priceLabel(property.price));
-}
+} */
 
 // const property = {name:"Skyline Towers", price:7500000 }
 // const copy = property;
