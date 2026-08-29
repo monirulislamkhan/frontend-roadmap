@@ -32,6 +32,19 @@ function renderCards(list) {
 }
 renderCards(properties);
 
+const cityButtons = document.querySelectorAll('button[data-city]');
+cityButtons.forEach((button) =>
+  button.addEventListener('click', function () {
+    cityButtons.forEach(function (btn) {
+      btn.classList.remove('active');
+    });
+    button.classList.add('active');
+    const cityName = button.dataset.city;
+    const conditionWiseCities = cityName === 'all' ? properties : properties.filter((item) => item.city === cityName);
+    renderCards(conditionWiseCities);
+  })
+);
+
 // STEP 2 — render the cards
 // Write renderCards(list) that puts one card per property into #listing.
 // Card markup to aim for:
