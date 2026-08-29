@@ -45,6 +45,11 @@ cityButtons.forEach((button) =>
   })
 );
 
+const switchTheme = document.getElementById('theme');
+switchTheme.addEventListener('click', () => {
+  document.querySelector('body').classList.toggle('dark');
+});
+
 // STEP 2 — render the cards
 // Write renderCards(list) that puts one card per property into #listing.
 // Card markup to aim for:
