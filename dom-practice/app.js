@@ -1,24 +1,25 @@
 'use strict';
+
 // app.js — DOM practice
-// properties.js is loaded before this file, so `properties` is available here.
-// Write everything below yourself. One step at a time.
-
-// STEP 1 — search box
-// Grab #search, listen for the right event, log what the user typed.
+// properties.js loads before this file, so `properties` is available here.
 const search = document.querySelector('#search');
-search.addEventListener('input', function (event) {
-  const text = event.target.value.toLowerCase();
-  const found = properties.filter((item) => item.name.toLowerCase().includes(text));
-  renderCards(found);
-});
-
 const listing = document.querySelector('#listing');
+const cityButtons = document.querySelectorAll('button[data-city]');
+const themeButton = document.querySelector('#theme');
 
+// ---------- State ----------
+// The two filters the user can change. Everything on screen is built from these.
+
+let currentCity = 'all';
+let currentSearch = '';
+
+// ---------- Render ----------
 function renderCards(list) {
   if (!list.length) {
     listing.innerHTML = '<p class="empty">No properties found</p>';
     return;
   }
+
   listing.innerHTML = list
     .map(
       (item) => `
@@ -30,53 +31,51 @@ function renderCards(list) {
     )
     .join('');
 }
-renderCards(properties);
 
-const cityButtons = document.querySelectorAll('button[data-city]');
+// ---------- Search ----------
+search.addEventListener('input', function (event) {
+  currentSearch = event.target.value.toLowerCase();
+  applyFilters();
+});
+
+// ---------- City filters ----------
 cityButtons.forEach((button) =>
   button.addEventListener('click', function () {
     cityButtons.forEach(function (btn) {
       btn.classList.remove('active');
     });
     button.classList.add('active');
-    const cityName = button.dataset.city;
-    const conditionWiseCities = cityName === 'all' ? properties : properties.filter((item) => item.city === cityName);
-    renderCards(conditionWiseCities);
+
+    currentCity = button.dataset.city;
+    applyFilters();
   })
 );
 
-const switchTheme = document.getElementById('theme');
-switchTheme.addEventListener('click', () => {
-  document.querySelector('body').classList.toggle('dark');
+// ---------- Theme ----------
+themeButton.addEventListener('click', () => {
+  document.body.classList.toggle('dark');
 });
 
-// STEP 2 — render the cards
-// Write renderCards(list) that puts one card per property into #listing.
-// Card markup to aim for:
-//   <div class="card" data-id="1">
-//     <h3>Skyline Towers</h3>
-//     <p class="meta">3 BHK in Noida</p>
-//     <span class="price">₹ 75.00 L</span>
-//   </div>
-// You already have priceLabel() and the bhk/type line from earlier sessions.
-// Call renderCards(properties) once so the page is not empty.
+// ---------- Card selection ----------
+listing.addEventListener('click', function (event) {
+  const card = event.target.closest('.card');
+  if (!card) return;
+  card.classList.toggle('selected');
+});
 
-// STEP 3 — "No results"
-// When the list is empty, show <p class="empty">No properties found</p> instead.
+// ---------- First paint ----------
+renderCards(properties);
 
-// STEP 4 — wire the search to the list
-// On every keystroke: filter by name, then render.
-// Remember: lowercase both sides.
+// ---------- STEP 8 — combine both filters (still to write)
+function applyFilters() {
+  let list = properties;
 
-// STEP 5 — city filter buttons
-// Clicking a button filters the list, and that button gets the "active" class.
-// Only one button should be active at a time. "all" clears the city filter.
-// The city is in data-city.
+  if (currentCity !== 'all') {
+    list = list.filter((property) => property.city === currentCity);
+  }
 
-// STEP 6 — dark mode
-// #theme toggles the "dark" class on <body>. The CSS is already written.
-
-// STEP 7 — event delegation
-// One listener on #listing, not one per card.
-// On click, find the clicked card and toggle "selected" on it.
-// event.target.closest(".card") is the tool.
+  if (currentSearch) {
+    list = list.filter((item) => item.name.toLowerCase().includes(currentSearch));
+  }
+  renderCards(list);
+}
