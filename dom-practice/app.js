@@ -10,6 +10,9 @@ const themeButton = document.querySelector('#theme');
 // ---------- State ----------
 // The two filters the user can change. Everything on screen is built from these.
 
+let currentCity = 'all';
+let currentSearch = '';
+
 // ---------- Render ----------
 function renderCards(list) {
   if (!list.length) {
@@ -39,19 +42,29 @@ search.addEventListener('input', (e) => {
 // ---------- City filters ----------
 cityButtons.forEach((button) => {
   button.addEventListener('click', () => {
+    cityButtons.forEach((btn) => btn.classList.remove('active'));
+    button.classList.add('active');
     const cityFound = button.dataset.city;
-
     const singleCity = properties.filter((item) => item.city === cityFound);
-
     renderCards(singleCity);
   });
 });
 
 // ---------- Theme ----------
+themeButton.addEventListener('click', () => {
+  document.body.classList.toggle('dark');
+});
 
-// ---------- Card selection ----------
-
+/* // ---------- Card selection ---------- */
+listing.addEventListener('click', (e) => {
+  const card = e.target.closest('.card');
+  if (!card) return;
+  card.classList.toggle('selected');
+});
 // ---------- First paint ----------
 renderCards(properties);
 
 // ---------- STEP 8 — combine both filters (still to write)
+function applyFiltered() {
+  let list = properties;
+}
