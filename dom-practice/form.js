@@ -73,14 +73,45 @@ enquiry.addEventListener('submit', (event) => {
   const email = emailInput.value.trim();
   const message = messageInput.value.trim();
   const phone = phoneInput.value.trim();
-  console.log({ name, email, phone, message });
 
-  console.log([...typesSelect.selectedOptions].map((option) => option.value));
-  console.log(
-    [...docsInput.files].map((file) => ({
-      size: file.size,
-      name: file.name,
-      type: file.type,
-    }))
-  );
+  const types = [...typesSelect.selectedOptions].map((option) => option.value);
+
+  const docs = [...docsInput.files].map((file) => ({
+    size: file.size,
+    name: file.name,
+    type: file.type,
+  }));
+
+  const bhk = document.querySelector('input[name="bhk"]:checked')?.value ?? '';
+  const status = document.querySelector('input[name="status"]:checked')?.value ?? '';
+
+  const amenties = [...document.querySelectorAll('input[name="amenity"]')]
+    .filter((item) => item.checked)
+    .map((amenity) => amenity.value);
+
+  const terms = document.querySelector('#terms').checked;
+
+  const enquiryData = {
+    name,
+    email,
+    country,
+    city,
+    locality,
+    code,
+    phone,
+    area,
+    budget,
+    visit,
+    visitTime,
+    status,
+    bhk,
+    types,
+    amenties,
+    docs,
+    message,
+    agent,
+    source,
+    terms,
+  };
+  console.log(enquiryData);
 });
