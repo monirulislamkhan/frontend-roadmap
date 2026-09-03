@@ -40,8 +40,13 @@ const areaInput = document.querySelector('#area');
 const budgetRange = document.querySelector('#budget');
 const budgetValue = document.querySelector('#budget-value');
 const visitInput = document.querySelector('#visit');
+const localityInput = document.querySelector('#locality');
+const codeSelect = document.querySelector('#code');
+const visitTimeInput = document.querySelector('#visit-time');
 const typesSelect = document.querySelector('#types');
 const docsInput = document.querySelector('#docs');
+const agentInput = document.querySelector('#agent');
+const sourceInput = document.querySelector('#source');
 
 budgetRange.addEventListener('input', (event) => {
   budgetValue.textContent = priceLabel(+event.target.value);
@@ -90,7 +95,8 @@ enquiry.addEventListener('submit', (event) => {
     .map((amenity) => amenity.value);
 
   const terms = document.querySelector('#terms').checked;
-
+  const locality = localityInput.value;
+  const visitTime = visitTimeInput.value;
   const enquiryData = {
     name,
     email,
