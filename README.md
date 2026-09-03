@@ -2,13 +2,13 @@
 
 > My personal 15-month roadmap: Senior UI Developer → Senior Frontend Developer. Updated weekly.
 
-_Started: July 2026 | Last updated: 13 August 2026 | Commitment: 6–8 hours a week_
+_Started: July 2026 | Last updated: 03 September 2026 | Commitment: 6–8 hours a week_
 
 ---
 
 ## PROGRESS SO FAR
 
-**Currently in: Phase 1 → Month 1 → Item 4 (Objects). Three of the seven Month 1 items are done.**
+**Currently in: Phase 1 → Month 1 project. All seven Month 1 topics are done.**
 
 Done so far:
 
@@ -18,6 +18,11 @@ Done so far:
 - **Week 1 warm-up: complete (09 Aug)** — type coercion, `==` vs `===`, truthy/falsy, short-circuit, `??`, loops, string methods, number methods, and the full `priceLabel` task with Cr/L formatting
 - **Item 2 — variables and reference: complete (12 Aug)** — reference vs copy, what `const` actually protects, shallow copy, the spread update pattern, template literals, `typeof`
 - **Item 3 — arrays: complete (13 Aug)** — `map`, `filter`, `find`, `reduce`, `sort`, `some`, `every`, `slice`, and all four practice tasks
+- **Item 4 — objects: complete (26 Aug)** — destructuring with rename and defaults, nested destructuring and where it crashes, `Object.entries`, computed keys, rest
+- **Item 5 — functions: complete (26 Aug)** — arrow syntax and the `({ })` trap, callbacks, `fn` vs `fn()`, `this`, and my own `myFilter` written from scratch
+- **Item 6 — the DOM: complete (03 Sep)** — a working property listing page: search, city filters, dark mode, and card selection through event delegation
+
+The listing page is most of the Month 1 project already. Price and BHK filters are the two pieces left.
 
 Two real bugs found and fixed in office React code along the way:
 
@@ -30,6 +35,8 @@ Some rules that came out of the practice and now apply everywhere:
 - Write a decision once, in one place. The same condition written twice will drift apart.
 - Clean bad data at the start of a chain, then the rest of the code needs no guards. An unnecessary guard makes code look unsure of itself.
 - Never put a dot straight after `find()` — `?.` first, then `??`
+- Give a function only what its job needs. `priceLabel(price)` works everywhere; `priceLabel(property)` only worked in one place.
+- Anything the screen depends on belongs in a variable, not in the DOM. Two filters that each started from the full list kept erasing each other.
 
 Still open in Phase 0: the Learning Log and the fixed calendar slots. Both are honest gaps, not finished work.
 
@@ -122,7 +129,7 @@ Still open in Phase 0: the Learning Log and the fixed calendar slots. Both are h
     - What `sort` taught me: `7500000 - null` becomes `7500000 - 0`, so a listing with no price looks like the cheapest one on the page. And `- undefined` gives `NaN`, which makes the order unreliable. Filtering those out beats patching them with `?? 0`.
     - `arr.length > 0`, never `if (arr)` — an empty array is truthy, so `every(p => p.photos)` says yes even when four listings have no photos at all.
 
-- [ ] **Objects: destructuring, spread `...`, optional chaining `?.`**
+- [x] **Objects: destructuring, spread `...`, optional chaining `?.`** ✅ _(completed 26 Aug 2026)_
   - Destructuring: `const { price, city } = property;` — also with rename (`price: cost`) and default values (`agent = "N/A"`)
   - Array destructuring too: `const [first, second] = properties;`
   - Nested destructuring for objects inside objects
@@ -132,8 +139,12 @@ Still open in Phase 0: the Learning Log and the fixed calendar slots. Both are h
   - `Object.keys`, `Object.values`, `Object.entries` — turning objects into arrays so the array methods work on them
   - Computed keys: `{ [cityName]: count }` — needed later for grouping and React forms
   - _Practice: write `applyDiscount(property, percent)` that returns a NEW object with the reduced price — the original must stay untouched. Prove it by logging both._
+    - ✅ Done, after three wrong attempts that were each worth having: `{ ...property, discount }` quietly added a new key instead of changing the price, and `{ ...property.price }` spread a number.
+    - Nested destructuring crashes on `agent: null`, and a `= {}` default does not save it, because defaults only fire on `undefined`. Two steps and `agent?.phone ?? "Not available"` is the safe way.
+    - `Object.entries(...).map(([key, value]) => ...)` needs the square brackets. Without them the second parameter is `map`'s index, and the output silently becomes `"city,Noida : 0"`.
+    - Computed keys are the React form pattern: `{ ...form, [name]: value }` — one handler for every input.
 
-- [ ] **Functions: arrow functions, callbacks, how `this` behaves**
+- [x] **Functions: arrow functions, callbacks, how `this` behaves** ✅ _(completed 26 Aug 2026)_
   - Function declaration vs function expression vs arrow — and which are hoisted
   - Arrow syntax: one line with implicit return vs a block with `return`; returning an object needs `()` around it: `() => ({ ok: true })`
   - Default parameters: `function search(city = "Noida")`
@@ -141,8 +152,12 @@ Still open in Phase 0: the Learning Log and the fixed calendar slots. Both are h
   - Passing a function vs calling it: `onClick(handle)` vs `onClick(handle())` — the second one runs immediately, a very common bug
   - `this`: how it differs in a normal function vs an arrow function, and why click handlers get confusing
   - _Practice: write your own `myFilter(array, testFn)` that works like the real `filter`. If you can build it, you understand callbacks._
+    - ✅ Done: a `for...of` loop, `if (testFn(item))`, `result.push(item)`. Nobody uses this instead of `filter` — the point is that the loop inside `filter` stops being a mystery.
+    - Why `{` after an arrow is always a body and never an object, so returning one needs `({ })`. A body with no `return` gives `undefined` eighteen times.
+    - A callback has to *return* its answer. Wrapping it in `console.log` prints the right thing and hands back nothing.
+    - Parameters are positional, and JavaScript never checks what you passed. Swapping `(array, testFn)` fails at runtime with a confusing error — which is the argument for TypeScript in Phase 2.
 
-- [ ] **DOM work: querySelector, events, classList**
+- [x] **DOM work: querySelector, events, classList** ✅ _(completed 03 Sep 2026)_
   - `querySelector` / `querySelectorAll` — and the difference in what they return (one element vs a NodeList)
   - `addEventListener` for `click`, `input`, `submit` — and the `event` object (`event.target`, `event.preventDefault()`)
   - `input` vs `change` events — which one fires while typing
@@ -151,10 +166,17 @@ Still open in Phase 0: the Learning Log and the fixed calendar slots. Both are h
   - Creating elements: `createElement` + `append`, or building card HTML with template literals
   - Event delegation: one listener on the parent instead of twenty on the children — check `event.target.closest(".card")`
   - _Practice: render your property array as cards on a page. Add one button that toggles a "dark" class on the body. You know the CSS; now drive it from JS._
+    - ✅ Done, and then some: search, city filter buttons with an active state, dark mode, and card selection.
+    - I wrote the naive version of the click handler first — one listener per card — and it worked until the first search. `innerHTML` replaces every card, and listeners die with the elements they were attached to. One listener on the parent plus `closest(".card")` survives every re-render.
+    - A NodeList is not an array. Neither is `select.selectedOptions`, nor `input.files`. All three need `[...spread]` before `map`.
+    - `dataset` values are always strings, so a filter button reads `data-city`, never its own text. Text is for people; data attributes are for code.
+    - Styles stay in the stylesheet. JavaScript only adds and removes class names.
 
-**Month 1 project:** _Filterable Property Listing_ (pure JS, no framework)
+**Month 1 project:** _Filterable Property Listing_ (pure JS, no framework) — **mostly built**
 — One page with 15–20 properties as an array of objects. Filter buttons (price, location, BHK). A search box. All in plain JS.
 — Real estate is my own domain, so this project will also be useful in interviews.
+— Done: the 18 properties, the search box, the location filter, and both of them working together. Left: the price and BHK filters, which are the same pattern again.
+— The bug worth recording: search and the city filter each started from the full list, so whichever ran last wiped the other one out while the button still looked selected. The fix was to keep the current city and the current search in two variables and let one function rebuild the list from them. That is the idea behind `useState` — written by hand, months before meeting it in React.
 
 ### Month 2 — Async JavaScript (critical for React)
 
@@ -259,6 +281,7 @@ Still open in Phase 0: the Learning Log and the fixed calendar slots. Both are h
 
 **Month 3 project:** _Form + Validation + Storage_
 — A property-enquiry form: validation (email, phone), showing errors, saving to localStorage on submit, and rendering the list of saved entries.
+— The markup and the DOM half are already built, early, while learning events: every input type in one form, including dependent country and city selects, a range slider with a live label, a multiple select, and a file input. Reading them taught me that `.value` lies on a multiple select — it hands back only the first option — and that a file input's `.value` is a fake path. Validation and localStorage wait for this month.
 
 ### ✋ PHASE 1 MILESTONE TEST (pass this before moving on):
 
