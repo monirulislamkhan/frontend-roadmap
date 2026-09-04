@@ -36,12 +36,12 @@ const phoneInput = document.querySelector('#phone');
 const messageInput = document.querySelector('#message');
 const countrySelect = document.querySelector('#country');
 const citySelect = document.querySelector('#city');
+const codeSelect = document.querySelector('#code');
 const areaInput = document.querySelector('#area');
 const budgetRange = document.querySelector('#budget');
 const budgetValue = document.querySelector('#budget-value');
 const visitInput = document.querySelector('#visit');
 const localityInput = document.querySelector('#locality');
-const codeSelect = document.querySelector('#code');
 const visitTimeInput = document.querySelector('#visit-time');
 const typesSelect = document.querySelector('#types');
 const docsInput = document.querySelector('#docs');
@@ -74,10 +74,29 @@ countrySelect.addEventListener('change', (e) => {
 
 enquiry.addEventListener('submit', (event) => {
   event.preventDefault();
+
+  document.querySelectorAll('.error').forEach((el) => {
+    el.hidden = true;
+  });
+  document.querySelectorAll('.invalid').forEach((el) => el.classList.remove('invalid'));
   const name = nameInput.value.trim();
   const email = emailInput.value.trim();
-  const message = messageInput.value.trim();
+  const country = countrySelect.value;
+  const city = citySelect.value;
+  const code = codeSelect.value;
   const phone = phoneInput.value.trim();
+  const area = areaInput.valueAsNumber;
+  const budget = budgetRange.valueAsNumber;
+  const visit = visitInput.value;
+  const visitTime = visitTimeInput.value;
+  const locality = localityInput.value.trim();
+  const agent = agentInput.value;
+  const message = messageInput.value.trim();
+  const source = sourceInput.value;
+
+  // Error Variables
+  let isValid = true;
+  const nameError = document.querySelector('#name-error');
 
   const types = [...typesSelect.selectedOptions].map((option) => option.value);
 
@@ -90,29 +109,37 @@ enquiry.addEventListener('submit', (event) => {
   const bhk = document.querySelector('input[name="bhk"]:checked')?.value ?? '';
   const status = document.querySelector('input[name="status"]:checked')?.value ?? '';
 
-  const amenties = [...document.querySelectorAll('input[name="amenity"]')]
+  const amenities = [...document.querySelectorAll('input[name="amenity"]')]
     .filter((item) => item.checked)
     .map((amenity) => amenity.value);
 
   const terms = document.querySelector('#terms').checked;
-  const locality = localityInput.value;
-  const visitTime = visitTimeInput.value;
+
+  if (!name) {
+    nameError.textContent = 'Name is required';
+    nameError.hidden = false;
+    nameInput.classList.add('invalid');
+    isValid = false;
+  }
+
+  if (!isValid) return;
+
   const enquiryData = {
     name,
     email,
     country,
     city,
-    locality,
     code,
     phone,
     area,
     budget,
+    locality,
     visit,
     visitTime,
     status,
     bhk,
     types,
-    amenties,
+    amenities,
     docs,
     message,
     agent,
