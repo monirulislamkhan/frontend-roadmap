@@ -30,6 +30,7 @@ function priceLabel(price) {
 
 //
 const enquiry = document.querySelector('#enquiry');
+const result = document.querySelector('#result');
 const nameInput = document.querySelector('#name');
 const emailInput = document.querySelector('#email');
 const phoneInput = document.querySelector('#phone');
@@ -47,6 +48,17 @@ const typesSelect = document.querySelector('#types');
 const docsInput = document.querySelector('#docs');
 const agentInput = document.querySelector('#agent');
 const sourceInput = document.querySelector('#source');
+const resetButton = document.querySelector('#clear');
+
+// Error Variables
+const nameError = document.querySelector('#name-error');
+const emailError = document.querySelector('#email-error');
+const phoneError = document.querySelector('#phone-error');
+const countryError = document.querySelector('#country-error');
+const cityError = document.querySelector('#city-error');
+const bhkError = document.querySelector('#bhk-error');
+const statusError = document.querySelector('#status-error');
+const termsError = document.querySelector('#terms-error');
 
 budgetRange.addEventListener('input', (event) => {
   budgetValue.textContent = priceLabel(+event.target.value);
@@ -75,6 +87,8 @@ countrySelect.addEventListener('change', (e) => {
 enquiry.addEventListener('submit', (event) => {
   event.preventDefault();
 
+  let isValid = true;
+
   document.querySelectorAll('.error').forEach((el) => {
     el.hidden = true;
   });
@@ -93,10 +107,6 @@ enquiry.addEventListener('submit', (event) => {
   const agent = agentInput.value;
   const message = messageInput.value.trim();
   const source = sourceInput.value;
-
-  // Error Variables
-  let isValid = true;
-  const nameError = document.querySelector('#name-error');
 
   const types = [...typesSelect.selectedOptions].map((option) => option.value);
 
@@ -119,6 +129,51 @@ enquiry.addEventListener('submit', (event) => {
     nameError.textContent = 'Name is required';
     nameError.hidden = false;
     nameInput.classList.add('invalid');
+    isValid = false;
+  }
+
+  if (!email || !email.includes('@')) {
+    emailError.textContent = 'Enter a valid email address';
+    emailError.hidden = false;
+    emailInput.classList.add('invalid');
+    isValid = false;
+  }
+
+  if (!phone || phone.length !== 10) {
+    phoneError.textContent = 'Enter a 10-digit phone number';
+    phoneError.hidden = false;
+    phoneInput.classList.add('invalid');
+    isValid = false;
+  }
+
+  if (!country) {
+    countryError.textContent = 'Country is required';
+    countryError.hidden = false;
+    countrySelect.classList.add('invalid');
+    isValid = false;
+  }
+
+  if (!city) {
+    cityError.textContent = 'City is required';
+    cityError.hidden = false;
+    citySelect.classList.add('invalid');
+    isValid = false;
+  }
+
+  if (!bhk) {
+    bhkError.textContent = 'BHK is required';
+    bhkError.hidden = false;
+    isValid = false;
+  }
+
+  if (!status) {
+    statusError.textContent = 'Select buy or rent';
+    statusError.hidden = false;
+    isValid = false;
+  }
+  if (!terms) {
+    termsError.textContent = 'Please agree to be contacted';
+    termsError.hidden = false;
     isValid = false;
   }
 
@@ -147,4 +202,17 @@ enquiry.addEventListener('submit', (event) => {
     terms,
   };
   console.log(enquiryData);
+  result.hidden = false;
+  result.textContent = 'Enquiry sent';
+  clearForm();
+});
+
+function clearForm() {
+  enquiry.reset();
+  fillCities('');
+  budgetValue.textContent = priceLabel(budgetRange.valueAsNumber);
+}
+
+resetButton.addEventListener('click', () => {
+  clearForm();
 });
