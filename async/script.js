@@ -1,17 +1,36 @@
-function wait(ms) {
-  const p = new Promise(function (resolve) {
-    setTimeout(function () {
-      resolve('Solve ho gaya');
-    }, ms);
-  });
-  return p;
-}
-
-wait(2000)
+/* wait(2000)
   .then(function (value) {
     console.log(value);
-    return 'Noida';
+    return 'Kolkata';
   })
   .then(function (value) {
-    console.log('2:', value);
+    console.log(value);
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+  .finally(function () {
+    console.log('Finally is done');
+  }); */
+
+function wait(ms) {
+  const promise = new Promise(function (resolve, reject) {
+    setTimeout(function () {
+      // resolve('Data Received');
+      reject('Error: something wrong');
+    }, ms);
   });
+  return promise;
+}
+
+async function run() {
+  try {
+    const value = await wait(2000);
+    console.log(value);
+  } catch (e) {
+    console.log(e);
+  } finally {
+    console.log('always runs');
+  }
+}
+run();
