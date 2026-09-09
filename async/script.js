@@ -13,7 +13,7 @@
     console.log('Finally is done');
   }); */
 
-function wait(ms) {
+/* function wait(ms) {
   const promise = new Promise(function (resolve, reject) {
     setTimeout(function () {
       // resolve('Data Received');
@@ -33,4 +33,46 @@ async function run() {
     console.log('always runs');
   }
 }
-run();
+run(); */
+
+// pending
+/* const p1 = new Promise(function (resolve, reject) {
+  console.log('executer run');
+});
+
+console.log('1 pending', p1); */
+
+// fullfiled
+/* const p2 = new Promise(function (resolve, reject) {
+  resolve('Data found');
+});
+console.log('Data fullfiled', p2);
+
+const p3 = new Promise(function (resolve, reject) {
+  reject('Network down');
+});
+console.log('reject:', p3);
+p3.catch(function (e) {
+  console.log(e);
+}); */
+
+/* const p4 = new Promise(function (resolve, reject) {
+  setTimeout(function () {
+    resolve('2 second baad aayi value');
+  }, 2000);
+});
+
+console.log('abhi ka p4  :', p4);
+
+setTimeout(function () {
+  console.log('3 sec baad p4 :', p4);
+}, 3000); */
+
+const p5 = new Promise(function (resolve, reject) {
+  resolve('pehla');
+  resolve('doosra');
+  reject('teesra');
+  console.log('resolve ke baad ki line');
+});
+
+console.log('p5 =', p5);
