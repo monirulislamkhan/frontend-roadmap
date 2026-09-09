@@ -68,11 +68,40 @@ setTimeout(function () {
   console.log('3 sec baad p4 :', p4);
 }, 3000); */
 
-const p5 = new Promise(function (resolve, reject) {
+/* const p5 = new Promise(function (resolve, reject) {
   resolve('pehla');
   resolve('doosra');
   reject('teesra');
   console.log('resolve ke baad ki line');
 });
 
-console.log('p5 =', p5);
+console.log('p5 =', p5); */
+
+function wait(ms) {
+  const promise = new Promise(function (resolve, reject) {
+    setTimeout(function () {
+      resolve('Data Received');
+      reject('Error: something wrong');
+    }, ms);
+  });
+  return promise;
+}
+
+/* async function run() {
+  console.time('total');
+  const a = await wait(2000);
+  const b = await wait(2000);
+  console.log(a);
+  console.timeEnd('total');
+}
+
+run(); */
+
+async function run() {
+  console.time('total');
+  const [a, b] = await Promise.all([wait(2000), wait(2000)]);
+  console.log(a, b);
+  console.timeEnd('total');
+}
+
+run();
