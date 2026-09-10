@@ -87,21 +87,9 @@ function wait(ms) {
   return promise;
 }
 
-/* async function run() {
-  console.time('total');
-  const a = await wait(2000);
-  const b = await wait(2000);
-  console.log(a);
-  console.timeEnd('total');
-}
-
-run(); */
-
 async function run() {
-  console.time('total');
-  const [a, b] = await Promise.all([wait(2000), wait(2000)]);
-  console.log(a, b);
-  console.timeEnd('total');
+  const response = await fetch('https://jsonplaceholder.typicode.com/userzzz');
+  const data = await response.json();
 }
 
 run();
