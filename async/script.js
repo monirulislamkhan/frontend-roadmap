@@ -77,7 +77,7 @@ setTimeout(function () {
 
 console.log('p5 =', p5); */
 
-function wait(ms) {
+/* function wait(ms) {
   const promise = new Promise(function (resolve, reject) {
     setTimeout(function () {
       resolve('Data Received');
@@ -85,11 +85,20 @@ function wait(ms) {
     }, ms);
   });
   return promise;
-}
+} */
 
 async function run() {
-  const response = await fetch('https://jsonplaceholder.typicode.com/userzzz');
-  const data = await response.json();
+  try {
+    const response = await fetch('https://jsonplaceholder.typicode.com/userssdfsf');
+    console.log(response);
+    if (!response.ok) {
+      throw new Error('Request failed with status ' + response.status);
+    }
+    const data = await response.json();
+    console.log(data);
+  } catch (e) {
+    console.log('Error: ', e.message);
+  }
 }
 
 run();
