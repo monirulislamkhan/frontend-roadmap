@@ -77,28 +77,91 @@ setTimeout(function () {
 
 console.log('p5 =', p5); */
 
-/* function wait(ms) {
-  const promise = new Promise(function (resolve, reject) {
+function wait(ms) {
+  const promise = new Promise(function (resolve) {
     setTimeout(function () {
       resolve('Data Received');
-      reject('Error: something wrong');
     }, ms);
   });
   return promise;
+}
+const output = document.querySelector('#output');
+
+const paragraph = document.createElement('p');
+function showLoading() {
+  paragraph.textContent = 'Loading....';
+  output.append(paragraph);
+}
+
+/* function hideLoading() {
+  paragraph.remove();
 } */
 
 async function run() {
+  showLoading();
   try {
-    const response = await fetch('https://jsonplaceholder.typicode.com/userssdfsf');
-    console.log(response);
+    const response = await fetch('https://jsonplaceholder.typicode.com/users');
     if (!response.ok) {
       throw new Error('Request failed with status ' + response.status);
     }
     const data = await response.json();
-    console.log(data);
+    const allName = data.map((item) => `<div>${item.name}</div>`).join(' ');
+    output.innerHTML = allName;
+    return data;
   } catch (e) {
     console.log('Error: ', e.message);
+    output.innerHTML = e.message;
   }
 }
 
-run();
+async function main() {
+  const users = await run();
+  users.map((item) => console.log(item.name));
+  const a = users.map((item) => console.log(item.name));
+  const b = users.forEach((item) => console.log(item.name));
+  console.log('map returned: ', a);
+  console.log('forEach returned: ', b);
+}
+// main();
+
+async function todos() {
+  try {
+    const response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+    if (!response.ok) {
+      throw new Error('url status is ' + response.status);
+    }
+    const result = await response.json();
+  } catch (e) {
+    console.log(e.message);
+  }
+}
+todos();
+
+const loadUser = document.querySelector('#load');
+loadUser.addEventListener('click', main);
+
+const property = { id: 1, name: 'sky Tower', price: 7500000 };
+const text = JSON.stringify(property);
+console.log(text);
+console.log(typeof text);
+
+const back = JSON.parse(text);
+console.log(back);
+console.log(typeof back);
+console.log(text.name);
+
+localStorage.setItem('user', JSON.stringify(property));
+const saved = localStorage.getItem('user');
+console.log(saved.name);
+
+try {
+  const bad = '{id:1, name:"Sky Tower"}';
+  const result = JSON.parse(bad);
+  console.log(result);
+} catch (e) {
+  console.log(e.message);
+}
+
+const bad = '{id:1, name:"Sky Tower"}';
+const result = JSON.parse(bad);
+console.log(result);
