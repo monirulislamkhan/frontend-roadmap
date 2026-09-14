@@ -178,3 +178,4 @@ const property = {
   discount: undefined,
 };
 console.log(JSON.stringify(property));
+console.log(property);
