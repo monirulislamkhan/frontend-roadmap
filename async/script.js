@@ -140,7 +140,7 @@ todos();
 const loadUser = document.querySelector('#load');
 loadUser.addEventListener('click', main);
 
-const property = { id: 1, name: 'sky Tower', price: 7500000 };
+/* const property = { id: 1, name: 'sky Tower', price: 7500000 };
 const text = JSON.stringify(property);
 console.log(text);
 console.log(typeof text);
@@ -164,4 +164,17 @@ try {
 
 const bad = '{id:1, name:"Sky Tower"}';
 const result = JSON.parse(bad);
-console.log(result);
+console.log(result); */
+
+const property = {
+  id: 1,
+  name: 'Sky Tower',
+  agent: null,
+  photos: [],
+  visit: new Date(),
+  showName: function () {
+    return this.name;
+  },
+  discount: undefined,
+};
+console.log(JSON.stringify(property));
