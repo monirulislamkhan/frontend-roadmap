@@ -140,7 +140,22 @@ todos();
 const loadUser = document.querySelector('#load');
 loadUser.addEventListener('click', main);
 
-/* const property = { id: 1, name: 'sky Tower', price: 7500000 };
+/* const property = { id: 1, name: 'sky Tower', price: 7500000, visit: new Date() }; */
+/* const property = { id: 1, name: 'sky Tower', price: 7500000, visit: new Date() };
+
+localStorage.setItem('prop', JSON.stringify(property));
+const text = localStorage.getItem('prop');
+console.log(text);
+try {
+  const backToObject = JSON.parse(text);
+  console.log(backToObject);
+} catch (e) {
+  console.log(e.message);
+}
+
+localStorage.removeItem('prop'); */
+
+/* 
 const text = JSON.stringify(property);
 console.log(text);
 console.log(typeof text);
@@ -166,7 +181,7 @@ const bad = '{id:1, name:"Sky Tower"}';
 const result = JSON.parse(bad);
 console.log(result); */
 
-const property = {
+/* const property = {
   id: 1,
   name: 'Sky Tower',
   agent: null,
@@ -178,4 +193,38 @@ const property = {
   discount: undefined,
 };
 console.log(JSON.stringify(property));
-console.log(property);
+console.log(property); */
+
+/* try {
+  const badJson = '{id:"1", name:"New Tower"}';
+  const res = JSON.parse(badJson);
+  console.log(res);
+} catch (e) {
+  console.log(e);
+} */
+
+/* const property = {
+  id: 1,
+  name: 'Sky Tower',
+  agent: null,
+  photos: [],
+  visit: new Date(),
+  showName: function () {
+    return this.name;
+  },
+  discount: undefined,
+};
+
+const back = JSON.parse(JSON.stringify(property));
+console.log(back.visit?.getFullYear()); */
+
+/* localStorage.setItem('newProps', JSON.stringify(property));
+const getLocalStorageVal = localStorage.getItem('newProps');
+console.log(JSON.parse(getLocalStorageVal)); */
+
+async function run() {
+  const response = fetch('https://jsonplaceholder.typicode.com/posts', {
+    method: 'POST',
+    // headers: {'Content-'}
+  });
+}
