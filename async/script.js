@@ -221,10 +221,23 @@ console.log(back.visit?.getFullYear()); */
 /* localStorage.setItem('newProps', JSON.stringify(property));
 const getLocalStorageVal = localStorage.getItem('newProps');
 console.log(JSON.parse(getLocalStorageVal)); */
+const formData = { name: 'New Name', city: 'New Delhi', budget: 5000000 };
 
 async function run() {
-  const response = fetch('https://jsonplaceholder.typicode.com/posts', {
-    method: 'POST',
-    // headers: {'Content-'}
-  });
+  try {
+    const response = await fetch('https://jsonplaceholder.typicode.com/postszzz', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
+    if (!response.ok) {
+      throw new Error('Request failed: ' + response.status);
+    }
+    const data = await response.json();
+    console.log('Response: ', response.ok, data, ' Status: ', response.status);
+  } catch (e) {
+    console.log(e.message);
+  }
 }
+run();
+console.log('Rest code run');
