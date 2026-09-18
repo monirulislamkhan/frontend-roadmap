@@ -2,7 +2,7 @@
 
 > My personal 15-month roadmap: Senior UI Developer → Senior Frontend Developer. Updated weekly.
 
-_Started: July 2026 | Last updated: 16 September 2026 | Commitment: 6–8 hours a week_
+_Started: July 2026 | Last updated: 17 September 2026 | Commitment: 6–8 hours a week_
 
 ---
 
@@ -21,7 +21,7 @@ Done so far:
 - **Item 4 — objects: complete (26 Aug)** — destructuring with rename and defaults, nested destructuring and where it crashes, `Object.entries`, computed keys, rest
 - **Item 5 — functions: complete (26 Aug)** — arrow syntax and the `({ })` trap, callbacks, `fn` vs `fn()`, `this`, and my own `myFilter` written from scratch
 - **Item 6 — the DOM: complete (03 Sep)** — a working property listing page: search, city filters, dark mode, and card selection through event delegation
-- **Month 2 — async JavaScript: complete (16 Sep)** — the event loop, Promises, `async/await`, `fetch`, JSON, and closures. Written by hand along the way: a `wait(ms)` Promise wrapper, a fetch page with real loading and error states, and a counter that shows where a closure keeps its value.
+- **Month 2 — async JavaScript: complete (16–17 Sep)** — the event loop, Promises, `async/await`, `fetch` (GET and POST, query params, CORS), JSON, and closures. Written by hand along the way: a `wait(ms)` Promise wrapper, a fetch page with real loading and error states, and a counter that shows where a closure keeps its value.
 
 The listing page is most of the Month 1 project already. Price and BHK filters are the two pieces left.
 
@@ -40,6 +40,8 @@ Some rules that came out of the practice and now apply everywhere:
 - Anything the screen depends on belongs in a variable, not in the DOM. Two filters that each started from the full list kept erasing each other.
 - `map` builds a new array. If nothing uses what comes back, the honest method is `forEach`.
 - A `<select multiple>` read with `.value` hands back only the first selected option. No error, no warning — the rest of the answer just disappears.
+- Check the right thing, not the nearby thing: `if (!response)` can never be true because an object is truthy — the real check is `if (!response.ok)`.
+- `console.log` takes commas; `new Error()` takes one argument. A comma there drops everything after it, silently.
 
 Still open in Phase 0: the Learning Log and the fixed calendar slots. Both are honest gaps, not finished work.
 
@@ -220,7 +222,7 @@ Still open in Phase 0: the Learning Log and the fixed calendar slots. Both are h
     - `try/catch/finally` is `.then/.catch/.finally` written the other way round — same three jobs.
     - `async` and `await` look alike but do opposite things: one wraps a value into a Promise on the way out, the other unwraps one on the way in.
 
-- [x] **`fetch` API: GET, POST, error handling, loading states** ✅ _(GET, errors and loading states done 16 Sep 2026; POST and query params still to do)_
+- [x] **`fetch` API: GET, POST, error handling, loading states** ✅ _(completed 17 Sep 2026)_
   - Basic GET: `fetch(url)` → check `response.ok` → `response.json()`
   - The trap: fetch does NOT reject on a 404 — you must check `response.ok` yourself; it only rejects when the network itself fails
   - `response.status` codes you must recognize: 200, 201, 400, 401, 404, 500
@@ -234,7 +236,16 @@ Still open in Phase 0: the Learning Log and the fixed calendar slots. Both are h
     - Two `await`s are needed because two things arrive at different times — the headers first, the body second.
     - Loading, success and error all write to the same element, and `innerHTML` replaces rather than adds, so a separate `hideLoading()` had nothing left to do. `finally` is for the things `innerHTML` cannot undo, like re-enabling a button.
     - A function can both draw the screen and return its data. Once `run()` returned the array, a second function could use it — which is exactly what `setData` does inside a React component.
-    - Still to do: POST with `JSON.stringify`, and query params with `URLSearchParams`.
+    - POST needs a second argument — `method`, `headers`, and `body: JSON.stringify(data)`. The body must be a string, which is why JSON comes before this topic.
+    - A successful POST returns **201, not 200**. 201 means "created". So `response.ok` is the right check, because it covers the whole 200–299 range; testing `status === 200` would make every successful POST look like a failure.
+    - The server sent my object straight back with an `id` it generated. That id is the thing a real app shows the user as an enquiry number.
+    - Query params: `new URLSearchParams({ userId: 1, _limit: 5 })` builds `?userId=1&_limit=5` and escapes spaces, which a hand-built template string does not.
+    - A 404 comes from a wrong **path**, not a wrong query value. I put junk on the end of a param and the server quietly ignored it and answered 200.
+    - Which leads to the rule that matters: an API accepts bad input silently. A misspelled field name went through without a word. **Validation is my job, not the server's** — which is exactly the Month 3 form topic.
+    - `new Error()` takes only ONE argument. Writing `new Error("failed: ", status)` drops the status without warning; it needs `+` or a template literal. `console.log` accepts commas, `new Error` does not.
+    - `if (!response)` is always false, because a response object is truthy. The check has to be `if (!response.ok)`. This one hid inside working code until a URL was broken on purpose.
+    - **CORS, seen for real:** fetching `google.com` from a local page was blocked with "No 'Access-Control-Allow-Origin' header is present". The console showed `net::ERR_FAILED 200 (OK)` — the server answered fine; the browser refused to hand the answer to my JavaScript.
+    - The tell: a server error gives a number (`404`). A CORS block gives a vague `Failed to fetch` with no status at all. No amount of editing the fetch call fixes it — the header comes from the server, so the fix is server-side or a proxy.
 
 - [x] **JSON: parse, stringify** ✅ _(completed 16 Sep 2026)_
   - `JSON.stringify` (object → string) and `JSON.parse` (string → object)
