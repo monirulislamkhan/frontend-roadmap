@@ -2,13 +2,13 @@
 
 > My personal 15-month roadmap: Senior UI Developer → Senior Frontend Developer. Updated weekly.
 
-_Started: July 2026 | Last updated: 03 September 2026 | Commitment: 6–8 hours a week_
+_Started: July 2026 | Last updated: 17 September 2026 | Commitment: 6–8 hours a week_
 
 ---
 
 ## PROGRESS SO FAR
 
-**Currently in: Phase 1 → Month 1 project. All seven Month 1 topics are done.**
+**Currently in: Phase 1 → Month 3. Month 1 and Month 2 are both complete — thirteen topics in all.**
 
 Done so far:
 
@@ -21,6 +21,7 @@ Done so far:
 - **Item 4 — objects: complete (26 Aug)** — destructuring with rename and defaults, nested destructuring and where it crashes, `Object.entries`, computed keys, rest
 - **Item 5 — functions: complete (26 Aug)** — arrow syntax and the `({ })` trap, callbacks, `fn` vs `fn()`, `this`, and my own `myFilter` written from scratch
 - **Item 6 — the DOM: complete (03 Sep)** — a working property listing page: search, city filters, dark mode, and card selection through event delegation
+- **Month 2 — async JavaScript: complete (16–17 Sep)** — the event loop, Promises, `async/await`, `fetch` (GET and POST, query params, CORS), JSON, and closures. Written by hand along the way: a `wait(ms)` Promise wrapper, a fetch page with real loading and error states, and a counter that shows where a closure keeps its value.
 
 The listing page is most of the Month 1 project already. Price and BHK filters are the two pieces left.
 
@@ -37,6 +38,10 @@ Some rules that came out of the practice and now apply everywhere:
 - Never put a dot straight after `find()` — `?.` first, then `??`
 - Give a function only what its job needs. `priceLabel(price)` works everywhere; `priceLabel(property)` only worked in one place.
 - Anything the screen depends on belongs in a variable, not in the DOM. Two filters that each started from the full list kept erasing each other.
+- `map` builds a new array. If nothing uses what comes back, the honest method is `forEach`.
+- A `<select multiple>` read with `.value` hands back only the first selected option. No error, no warning — the rest of the answer just disappears.
+- Check the right thing, not the nearby thing: `if (!response)` can never be true because an object is truthy — the real check is `if (!response.ok)`.
+- `console.log` takes commas; `new Error()` takes one argument. A comma there drops everything after it, silently.
 
 Still open in Phase 0: the Learning Log and the fixed calendar slots. Both are honest gaps, not finished work.
 
@@ -104,9 +109,8 @@ Still open in Phase 0: the Learning Log and the fixed calendar slots. Both are h
   - `const` by default; `let` only when the value will change; never `var` (learn _why_: function scope vs block scope)
   - Scope: block `{}` scope vs function scope — and hoisting in one line: declarations move up, values do not
   - ✅ The basic types: string, number, boolean, `null`, `undefined` — and checking them with `typeof` (plus the famous bug: `typeof null === "object"`)
-    - `typeof [] === "object"` too — an array *is* an object underneath, with number keys and an automatic `length`. So the reference-copy rule applies to arrays as well, and spread works on both: `{...obj}` and `[...arr]`.
+    - `typeof [] === "object"` too — an array _is_ an object underneath, with number keys and an automatic `length`. So the reference-copy rule applies to arrays as well, and spread works on both: `{...obj}` and `[...arr]`.
     - Which check to use: `typeof` for primitives, `Array.isArray()` for arrays, `== null` for "is it missing"
-
   - ✅ Arrays and objects are copied _by reference_, not by value — this one causes real bugs, slow down here
   - ✅ Shallow copy vs deep copy: spread `{...obj}` copies one level only; nested objects inside are still shared (`structuredClone` for a true deep copy)
   - ✅ Template literals: `` `${price}` `` instead of string + string; also multi-line strings and expressions inside `${}`
@@ -154,7 +158,7 @@ Still open in Phase 0: the Learning Log and the fixed calendar slots. Both are h
   - _Practice: write your own `myFilter(array, testFn)` that works like the real `filter`. If you can build it, you understand callbacks._
     - ✅ Done: a `for...of` loop, `if (testFn(item))`, `result.push(item)`. Nobody uses this instead of `filter` — the point is that the loop inside `filter` stops being a mystery.
     - Why `{` after an arrow is always a body and never an object, so returning one needs `({ })`. A body with no `return` gives `undefined` eighteen times.
-    - A callback has to *return* its answer. Wrapping it in `console.log` prints the right thing and hands back nothing.
+    - A callback has to _return_ its answer. Wrapping it in `console.log` prints the right thing and hands back nothing.
     - Parameters are positional, and JavaScript never checks what you passed. Swapping `(array, testFn)` fails at runtime with a confusing error — which is the argument for TypeScript in Phase 2.
 
 - [x] **DOM work: querySelector, events, classList** ✅ _(completed 03 Sep 2026)_
@@ -180,14 +184,18 @@ Still open in Phase 0: the Learning Log and the fixed calendar slots. Both are h
 
 ### Month 2 — Async JavaScript (critical for React)
 
-- [ ] **How JS waits: the event loop, in simple words**
+- [x] **How JS waits: the event loop, in simple words** ✅ _(completed 16 Sep 2026)_
   - JS runs one line at a time (single thread) — so slow things (network, timers) must not block the page
   - `setTimeout(fn, 0)` still runs AFTER all current code finishes — try it, see it, remember it
   - The picture to hold: call stack → browser does the waiting → callback queue → event loop puts it back
   - You do not need the deep theory — you need the one-line answer: "async code runs later, after the current code finishes"
   - _Practice: predict the print order of three logs (one sync, one in setTimeout 0, one in a Promise), then run it and check._
+    - ✅ My first explanation was wrong, and testing it is what fixed it. I thought the timer itself was slow. So I put a one-second blocking loop between the logs: if the timer were slow, the callback would still have won. It did not. The timer finished on time and the callback waited for the call stack to empty.
+    - That blocking loop was its own lesson — the page froze completely for a second. That is what "blocking" actually means.
+    - Promises jump the queue. A resolved Promise always runs before `setTimeout(fn, 0)`, because the event loop empties the microtask queue before it touches the timer queue.
+    - The answer I can now give out loud: the timer is handed to the browser, the callback waits in a queue, and the event loop moves it onto the stack only when the stack is empty.
 
-- [ ] **Promises: what they are, why they exist, `.then/.catch`**
+- [x] **Promises: what they are, why they exist, `.then/.catch`** ✅ _(completed 16 Sep 2026)_
   - A Promise = an object that represents a value that will arrive _later_
   - Three states: pending → fulfilled or rejected — learn to say this in your own words
   - `.then()` for success, `.catch()` for failure, `.finally()` for "always run" (hide the spinner here)
@@ -195,40 +203,77 @@ Still open in Phase 0: the Learning Log and the fixed calendar slots. Both are h
   - Why they exist: what "callback hell" looked like before them
   - `Promise.all([...])` = wait for all together; if one fails, all fails (`Promise.allSettled` when you want results anyway — read-level only)
   - _Practice: wrap `setTimeout` in a Promise — a `wait(ms)` function you can call as `wait(2000).then(...)`._
+    - ✅ `wait(ms)` written by hand. The mistake worth keeping: the first version built the Promise and then used it inside itself instead of returning it. Without `return`, `wait(2000)` hands back `undefined` and there is nothing for `.then` to attach to.
+    - `p.then(...)` and `p.catch(...)` written as two separate statements are two separate chains. The rejection reaches the second one and the first one still reports an unhandled rejection. Joined into one chain, the warning goes away. I ran both versions to see it.
+    - A `.then` that returns nothing passes `undefined` to the next one — easy to see once, hard to forget after.
+    - A Promise settles once. A `reject` written after a `resolve` is a dead line that does nothing at all.
+    - `.finally` is where a spinner gets hidden, because hiding it in both `.then` and `.catch` means writing the same decision twice, and missing it in one branch leaves the spinner running forever.
 
-- [ ] **`async/await` — practice this until you can write it with your eyes closed**
+- [x] **`async/await` — practice this until you can write it with your eyes closed** ✅ _(completed 16 Sep 2026)_
   - `async` in front of a function means it returns a Promise; `await` pauses until the Promise settles
   - `await` only works inside an `async` function (or top-level in modules)
   - Errors are handled with `try/catch` — this is the pattern you will write hundreds of times in React
   - Sequential vs parallel: two `await`s one after another vs `Promise.all([...])` — and when each is right
   - The forgotten-await bug: calling an async function without `await` gives you a Promise, not the value — learn to spot `[object Promise]` in output
   - _Practice: rewrite your `.then()` chains from the Promises topic using `async/await`. Same result, cleaner code._
+    - ✅ `await` does two things, and the second one took me two attempts to state: it pauses, and it hands back the value instead of the Promise. `const p = wait(2000)` gives a Promise; `const v = await wait(2000)` gives the string inside it.
+    - Measured with `console.time`: two `await`s one after another took 4005ms, and the same two calls inside `Promise.all` took 2009ms. `Promise.all` did not speed anything up — it removed the pause that was making the second call wait its turn.
+    - So the choice is about dependency, not speed: if the second call needs the first one's answer, they must be sequential. If they are independent, `Promise.all`.
+    - `try/catch/finally` is `.then/.catch/.finally` written the other way round — same three jobs.
+    - `async` and `await` look alike but do opposite things: one wraps a value into a Promise on the way out, the other unwraps one on the way in.
 
-- [ ] **`fetch` API: GET, POST, error handling, loading states**
+- [x] **`fetch` API: GET, POST, error handling, loading states** ✅ _(completed 17 Sep 2026)_
   - Basic GET: `fetch(url)` → check `response.ok` → `response.json()`
   - The trap: fetch does NOT reject on a 404 — you must check `response.ok` yourself; it only rejects when the network itself fails
   - `response.status` codes you must recognize: 200, 201, 400, 401, 404, 500
   - POST: method, headers (`Content-Type: application/json`), `body: JSON.stringify(data)`
   - Query params in the URL: `?city=Noida&max=50` — build them with template literals or `URLSearchParams`
+  - CORS, at understanding level: the browser blocks a cross-site response unless the server sends a header allowing it. Front-end code cannot fix this — knowing that saves a wasted day.
+  - Sending a token: `Authorization: Bearer <token>` as a request header, and the difference between 401 (not signed in) and 403 (signed in, not allowed). Where to keep the token comes with localStorage in Month 3.
   - The loading-state pattern: set a `loading` flag before, clear it after, show an error message on failure — this exact pattern is half of React data work
   - _Practice: fetch users from jsonplaceholder.typicode.com and render them as cards, with a "Loading..." message while waiting and an error message if the URL is wrong (break it on purpose to test)._
+    - ✅ Done for GET, on a real page with a button. Breaking the URL on purpose is what taught the most: the console showed a red `404 (Not Found)` line, but that is the browser reporting a request, not JavaScript throwing. My `catch` never ran and the code walked straight on to `response.json()`. Checking `response.ok` and throwing myself is what actually stops it.
+    - Two `await`s are needed because two things arrive at different times — the headers first, the body second.
+    - Loading, success and error all write to the same element, and `innerHTML` replaces rather than adds, so a separate `hideLoading()` had nothing left to do. `finally` is for the things `innerHTML` cannot undo, like re-enabling a button.
+    - A function can both draw the screen and return its data. Once `run()` returned the array, a second function could use it — which is exactly what `setData` does inside a React component.
+    - POST needs a second argument — `method`, `headers`, and `body: JSON.stringify(data)`. The body must be a string, which is why JSON comes before this topic.
+    - A successful POST returns **201, not 200**. 201 means "created". So `response.ok` is the right check, because it covers the whole 200–299 range; testing `status === 200` would make every successful POST look like a failure.
+    - The server sent my object straight back with an `id` it generated. That id is the thing a real app shows the user as an enquiry number.
+    - Query params: `new URLSearchParams({ userId: 1, _limit: 5 })` builds `?userId=1&_limit=5` and escapes spaces, which a hand-built template string does not.
+    - A 404 comes from a wrong **path**, not a wrong query value. I put junk on the end of a param and the server quietly ignored it and answered 200.
+    - Which leads to the rule that matters: an API accepts bad input silently. A misspelled field name went through without a word. **Validation is my job, not the server's** — which is exactly the Month 3 form topic.
+    - `new Error()` takes only ONE argument. Writing `new Error("failed: ", status)` drops the status without warning; it needs `+` or a template literal. `console.log` accepts commas, `new Error` does not.
+    - `if (!response)` is always false, because a response object is truthy. The check has to be `if (!response.ok)`. This one hid inside working code until a URL was broken on purpose.
+    - **CORS, seen for real:** fetching `google.com` from a local page was blocked with "No 'Access-Control-Allow-Origin' header is present". The console showed `net::ERR_FAILED 200 (OK)` — the server answered fine; the browser refused to hand the answer to my JavaScript.
+    - The tell: a server error gives a number (`404`). A CORS block gives a vague `Failed to fetch` with no status at all. No amount of editing the fetch call fixes it — the header comes from the server, so the fix is server-side or a proxy.
 
-- [ ] **JSON: parse, stringify**
+- [x] **JSON: parse, stringify** ✅ _(completed 16 Sep 2026)_
   - `JSON.stringify` (object → string) and `JSON.parse` (string → object)
   - Where you need them: APIs and localStorage — both only speak strings
   - What JSON cannot hold: functions, `undefined`, Dates become strings — know this before it bites
   - What breaks: parsing invalid JSON throws an error, so parse inside `try/catch`
   - _Practice: stringify a property object, look at the string, parse it back, confirm it is a real object again._
+    - ✅ Done. A stringified object is text, so `text.name` returns `undefined` — no error, just a quiet wrong answer that breaks somewhere else later. Same family as `[object Promise]` and `[object Object]`: the wrapper instead of the contents.
+    - Functions and `undefined` are dropped silently, while `null` and empty arrays survive. JSON does not ask whether a value is truthy — it asks whether the value can be written down. `{ price: null }` and `{ price: undefined }` reach a server as two different messages.
+    - A Date becomes a string and does not come back as a Date. Calling a Date method on it afterwards throws.
+    - `JSON.parse` on invalid text throws a real error, and the error even names the position of the bad character. It belongs inside `try/catch`, because the text always comes from somewhere I do not control.
 
-- [ ] **Closures — an interview favourite**
+- [x] **Closures — an interview favourite** ✅ _(completed 16 Sep 2026; the `var` loop trap still to do)_
   - A function remembers the variables of the place where it was _created_, even after that place is gone
   - The classic example: a counter function that keeps its own private count
   - Where you already use them without knowing: every event handler that reads an outer variable
   - The loop trap: `var` in a loop with setTimeout prints the same number — `let` fixes it; explain why
   - _Practice: write `makeCounter()` that returns a function; each call returns 1, 2, 3... Then explain out loud WHERE the count lives. That explanation is the interview answer._
+    - ✅ `makeCounter()` returns 1, 2, 3. The test that made it click was calling it twice: two counters, two separate counts, no interference.
+    - Where the count lives: the outer function created it, but it does not die when that function finishes, because the returned function is still using it.
+    - The direction only goes one way — the inner function can see outwards, nothing can see inwards. That is what makes the count private: no code outside can reach in and set it to 100.
+    - I had been writing closures for weeks without the name. Every click handler in the Month 1 project reads a variable declared outside it, long after that line finished running. React's `useState` is built on the same idea.
+    - Still to do: the `var` in a loop with `setTimeout` trap.
 
-**Month 2 project:** _Live Data Dashboard_
+**Month 2 project:** _Live Data Dashboard_ — **about two-thirds built**
 — Fetch data from a free public API (weather, currency, anything) and display it. Handle everything: loading spinner, error message, retry button. This exact pattern comes up in React every single day.
+— Done: the fetch itself, the loading message, the `response.ok` check, and a readable error on the page rather than only in the console.
+— Left: the retry button, and switching the demo API for something with more interesting data.
 
 ### Month 3 — Polish + Modules
 
@@ -251,6 +296,7 @@ Still open in Phase 0: the Learning Log and the fixed calendar slots. Both are h
   - `setItem`, `getItem`, `removeItem`, `clear` — and the rule: it only stores strings
   - So: `JSON.stringify` on the way in, `JSON.parse` on the way out
   - `getItem` on a missing key returns `null` — handle it with a default
+  - Where an auth token would live, and what that costs: anything in localStorage is readable by any script running on the page
   - Write two small helpers, `save(key, data)` and `load(key, fallback)`, and reuse them everywhere
   - _Practice: add a "favourite" button to your property cards; favourites must survive a page refresh._
 
@@ -279,9 +325,7 @@ Still open in Phase 0: the Learning Log and the fixed calendar slots. Both are h
   - Rule: copy a well-known validation pattern, understand its parts, move on. Regex mastery is NOT on this roadmap.
   - _Practice: validate a 10-digit phone and a simple email in your Month 3 form project._
 
-**Month 3 project:** _Form + Validation + Storage_
-— A property-enquiry form: validation (email, phone), showing errors, saving to localStorage on submit, and rendering the list of saved entries.
-— The markup and the DOM half are already built, early, while learning events: every input type in one form, including dependent country and city selects, a range slider with a live label, a multiple select, and a file input. Reading them taught me that `.value` lies on a multiple select — it hands back only the first option — and that a file input's `.value` is a fake path. Validation and localStorage wait for this month.
+**Month 3 project:** _Form + Validation + Storage_ — A property-enquiry form: validation (email, phone), showing errors, saving to localStorage on submit, and rendering the list of saved entries.
 
 ### ✋ PHASE 1 MILESTONE TEST (pass this before moving on):
 
@@ -383,6 +427,7 @@ The test is simple: explain it out loud, then do it, without help. **All four "y
   - Cleanup: return a function to remove listeners/timers — and _when_ React calls it (before the next run, and on unmount)
   - The infinite-loop mistake: setting state inside an effect that depends on that same state — learn to spot it
   - Race condition at read level: an old fetch answering after a new one — the `ignore` flag pattern in cleanup
+  - `AbortController`: cancelling a fetch that is no longer needed — this is where it finally connects to something
   - The bigger rule: if it can be calculated from props/state during render, it does NOT need an effect
   - _Practice: fetch properties inside useEffect with loading/error state. Then break it on purpose (remove the deps array), watch the loop, fix it, and explain why it happened._
 
@@ -604,6 +649,16 @@ The test is simple: explain it out loud, then do it, without help. **All four "y
   - _Practice: rebase one of your own feature branches onto main, once, slowly._
 
 **Practice trick:** make feature-branch → PR → merge the routine in every project. No more committing straight to main.
+
+### Build tooling — the 10% that matters (Month 13)
+
+- [ ] **What a bundler actually does, and reading a config someone else wrote**
+  - The job in one line: turn many source files into a few files a browser can load, and drop the code nothing uses
+  - `npm run dev` versus `npm run build` — a dev server that reloads as you type, against an optimised set of files for production
+  - Why production filenames carry a hash (`main.a3f9c2.js`): the name changes when the contents change, so browsers can cache the file forever and still pick up the new one
+  - Importing one module instead of a whole library — the difference shows up directly in the bundle size
+  - The goal is reading and changing an existing config, not writing one from scratch. Vite comes earlier anyway, in Phase 3.
+  - _Practice: on one real site, import only the components actually used instead of the whole framework, then record the CSS and JS size before and after._
 
 ### React Performance (Month 13)
 
