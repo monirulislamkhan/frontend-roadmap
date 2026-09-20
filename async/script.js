@@ -221,11 +221,11 @@ console.log(back.visit?.getFullYear()); */
 /* localStorage.setItem('newProps', JSON.stringify(property));
 const getLocalStorageVal = localStorage.getItem('newProps');
 console.log(JSON.parse(getLocalStorageVal)); */
-const formData = { name: 'New Name', city: 'New Delhi', budget: 5000000 };
+/* const formData = { name: 'New Name', city: 'New Delhi', budget: 5000000 };
 
 async function run() {
   try {
-    const response = await fetch('https://jsonplaceholder.typicode.com/postszzz', {
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
@@ -240,4 +240,36 @@ async function run() {
   }
 }
 run();
-console.log('Rest code run');
+
+async function urlDetails() {
+  try {
+    const params = new URLSearchParams({ userId: 1, _limit: 5 });
+    const url = `https://jsonplaceholder.typicode.com/posts?${params}`;
+
+    const response = await fetch(url);
+
+    if (!response.ok) throw new Error('URL Details is fail. Status : ' + response.status);
+
+    const data = await response.json();
+
+    console.log(url);
+    console.log('Data length:', data.length, data);
+  } catch (e) {
+    console.log(e.message);
+  }
+}
+
+urlDetails(); */
+
+async function corsFun() {
+  try {
+    const response = await fetch('https://api.github.com/users/monirulislamkhanzz');
+    if (!response.ok) throw new Error('Both of them urls.' + response.status);
+    const data = await response.json();
+    console.log(data);
+  } catch (e) {
+    console.log(e.message);
+  }
+}
+
+corsFun();
