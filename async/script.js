@@ -263,7 +263,7 @@ urlDetails(); */
 
 async function corsFun() {
   try {
-    const response = await fetch('https://api.github.com/users/monirulislamkhanzz');
+    const response = await fetch('https://api.github.com/users/monirulislamkhan');
     if (!response.ok) throw new Error('Both of them urls.' + response.status);
     const data = await response.json();
     console.log(data);
