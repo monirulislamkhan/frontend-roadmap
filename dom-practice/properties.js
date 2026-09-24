@@ -536,3 +536,4 @@ const property = {
 property.showLate(); */
 
 // (), {}, [], ?
+export { properties };
