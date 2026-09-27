@@ -3,7 +3,7 @@
 // 18 properties. Reuse this file for every Month 1 practice task.
 // Month 3 note: add `export` here once ES6 modules are covered.
 
-const properties = [
+export const properties = [
   {
     id: 1,
     name: 'Skyline Towers',
@@ -239,7 +239,7 @@ const properties = [
   },
 ];
 
-function priceLabel(price) {
+export function priceLabel(price) {
   const lakhs = 100000;
   const cr = 10000000;
 
