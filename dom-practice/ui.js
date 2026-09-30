@@ -1,13 +1,13 @@
-import { properties, priceLabel } from './properties.js';
+import { priceLabel } from './properties.js';
 
 // ---------- Render ----------
-function renderCards(list, propertyItem) {
+function renderCards(list, listingElement) {
   if (!list.length) {
-    propertyItem.innerHTML = '<p class="empty">No properties found</p>';
+    listingElement.innerHTML = '<p class="empty">No properties found</p>';
     return;
   }
 
-  propertyItem.innerHTML = list
+  listingElement.innerHTML = list
     .map(
       (item) => `
     <div class="card" data-id="${item.id}">
@@ -19,17 +19,17 @@ function renderCards(list, propertyItem) {
     .join('');
 }
 
-function applyFilters(city, search) {
-  let list = properties;
+function applyFilters(city, search, listingElement) {
+  // let list = listingElement;
 
   if (city !== 'all') {
-    list = list.filter((property) => property.city === city);
+    listingElement.filter((property) => property.city === city);
   }
 
   if (search) {
-    list = list.filter((item) => item.name.toLowerCase().includes(search));
+    listingElement.filter((item) => item.name.toLowerCase().includes(search));
   }
-  renderCards(list);
+  renderCards(list, listingElement);
 }
 
 export { renderCards, applyFilters };

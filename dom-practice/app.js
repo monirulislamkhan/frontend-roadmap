@@ -1,4 +1,3 @@
-'use strict';
 import { properties } from './properties.js';
 import { renderCards, applyFilters } from './ui.js';
 
@@ -17,7 +16,7 @@ let currentSearch = '';
 // ---------- Search ----------
 search.addEventListener('input', function (event) {
   currentSearch = event.target.value.toLowerCase();
-  applyFilters(currentCity, currentSearch);
+  applyFilters(currentCity, currentSearch, listing);
 });
 
 // ---------- City filters ----------
@@ -29,7 +28,7 @@ cityButtons.forEach((button) =>
     button.classList.add('active');
 
     currentCity = button.dataset.city;
-    applyFilters(currentCity, currentSearch);
+    applyFilters(currentCity, currentSearch, listing);
   })
 );
 
