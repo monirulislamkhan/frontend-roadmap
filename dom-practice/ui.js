@@ -19,17 +19,17 @@ function renderCards(list, listingElement) {
     .join('');
 }
 
-function applyFilters(city, search, listingElement) {
-  // let list = listingElement;
+function applyFilters(city, search, propertyList, listingElement) {
+  let allProperties = propertyList;
 
   if (city !== 'all') {
-    listingElement.filter((property) => property.city === city);
+    allProperties = allProperties.filter((property) => property.city === city);
   }
 
   if (search) {
-    listingElement.filter((item) => item.name.toLowerCase().includes(search));
+    allProperties = allProperties.filter((item) => item.name.toLowerCase().includes(search));
   }
-  renderCards(list, listingElement);
+  renderCards(allProperties, listingElement);
 }
 
 export { renderCards, applyFilters };

@@ -16,7 +16,7 @@ let currentSearch = '';
 // ---------- Search ----------
 search.addEventListener('input', function (event) {
   currentSearch = event.target.value.toLowerCase();
-  applyFilters(currentCity, currentSearch, listing);
+  applyFilters(currentCity, currentSearch, properties, listing);
 });
 
 // ---------- City filters ----------
@@ -28,7 +28,7 @@ cityButtons.forEach((button) =>
     button.classList.add('active');
 
     currentCity = button.dataset.city;
-    applyFilters(currentCity, currentSearch, listing);
+    applyFilters(currentCity, currentSearch, properties, listing);
   })
 );
 
