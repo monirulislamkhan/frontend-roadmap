@@ -69,10 +69,16 @@ for (const order of orders) {
     { id: 5, status: 'paid' },
   ];
   
-const orderCount = orders.reduce(function(acc, n){
-  console.log(n)
-  return n
-}, {})
+const orderCount = orders.reduce((acc, n)=>{
+  return [...acc, n.status]
+},[]);
+
+  /* const orderCount = orders.reduce((acc, n) => {
+  acc[n.status] = (acc[n.status] ?? 0)  + 1;
+  acc[n.status]
+  return acc
+},{}) */
+
 
 console.log(orderCount)
 
