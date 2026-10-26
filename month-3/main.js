@@ -87,7 +87,7 @@ const total = nums.reduce(function (acc, n){
 
 console.log(total) */
 
-const books = [
+/* const books = [
   { title: 'A', genre: 'fiction' },
   { title: 'B', genre: 'history' },
   { title: 'C', genre: 'fiction' },
@@ -101,4 +101,16 @@ const allGenre = books.reduce(function (acc, n){
   return acc
 },{})
 
-console.log(allGenre);
+console.log(allGenre); */
+
+//Concept: Set
+/* const genres = ['fiction', 'history', 'fiction', 'science'];
+const uniqe = new Set(genres);
+console.log(typeof uniqe, uniqe.size)
+console.log(genres)
+
+const revert = [...uniqe].map(item => item);
+console.log(revert) */
+const nums = [1, 2, 2, 3, 3, 3];
+const s = new Set(nums);
+console.log(s.size)
