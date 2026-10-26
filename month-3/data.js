@@ -1,4 +1,4 @@
-console.log('data.js chal gayi');
+// console.log('data.js chal gayi');
 export const cities = ['New Delhi', 'Gurgaon', 'Kolkata'];
 
 const siteName = 'Hco Real Estates';
