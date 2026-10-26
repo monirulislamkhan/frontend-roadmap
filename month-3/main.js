@@ -61,7 +61,7 @@ for (const order of orders) {
   }
   console.log(statusCount); */
   
-  const orders = [
+  /* const orders = [
     { id: 1, status: 'paid' },
     { id: 2, status: 'pending' },
     { id: 3, status: 'paid' },
@@ -72,6 +72,7 @@ for (const order of orders) {
 const orderCount = orders.reduce((acc, n)=>{
   return [...acc, n.status]
 },[]);
+console.log(orderCount) */
 
   /* const orderCount = orders.reduce((acc, n) => {
   acc[n.status] = (acc[n.status] ?? 0)  + 1;
@@ -79,6 +80,25 @@ const orderCount = orders.reduce((acc, n)=>{
   return acc
 },{}) */
 
+/* const nums = [5,3,2]
+const total = nums.reduce(function (acc, n){
+  return acc + n
+},0)
 
-console.log(orderCount)
+console.log(total) */
 
+const books = [
+  { title: 'A', genre: 'fiction' },
+  { title: 'B', genre: 'history' },
+  { title: 'C', genre: 'fiction' },
+  { title: 'D', genre: 'science' },
+  { title: 'E', genre: 'history' },
+  { title: 'F', genre: 'fiction' }
+];
+
+const allGenre = books.reduce(function (acc, n){
+  acc[n.genre] = (acc[n.genre] ?? 0) + 1;
+  return acc
+},{})
+
+console.log(allGenre);
