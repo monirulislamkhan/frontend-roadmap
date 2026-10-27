@@ -87,7 +87,7 @@ const total = nums.reduce(function (acc, n){
 
 console.log(total) */
 
-/* const books = [
+const books = [
   { title: 'A', genre: 'fiction' },
   { title: 'B', genre: 'history' },
   { title: 'C', genre: 'fiction' },
@@ -96,12 +96,13 @@ console.log(total) */
   { title: 'F', genre: 'fiction' }
 ];
 
-const allGenre = books.reduce(function (acc, n){
-  acc[n.genre] = (acc[n.genre] ?? 0) + 1;
-  return acc
-},{})
+/* const allGenre = books.reduce(function (acc, n){
+  // acc[n.genre] = (acc[n.genre] ?? 0) + 1;
+  return [...acc, n.genre]
+},[]) */
 
-console.log(allGenre); */
+// console.log(genreSet, genreSet.size);
+// console.log(allGenre);
 
 //Concept: Set
 /* const genres = ['fiction', 'history', 'fiction', 'science'];
@@ -111,6 +112,27 @@ console.log(genres)
 
 const revert = [...uniqe].map(item => item);
 console.log(revert) */
-const nums = [1, 2, 2, 3, 3, 3];
+/* const nums = [1, 2, 2, 3, 3, 3];
 const s = new Set(nums);
-console.log(s.size)
+console.log(s.size) */
+
+/* const genreMap = books.map(item => item.genre);
+const genreSet = new Set(genreMap)
+console.log(genreSet) */
+
+/* const uniqeGenres = [...new Set(books.map(item => item.genre))].sort();
+console.log(uniqeGenres) */
+
+
+/* const s = new Set(['fiction', 'history', 'science']);
+console.log(s.sort());
+console.log([...s]); */
+
+
+/* console.log(['science', 'fiction', 'history'].sort((a, b) => a - b)); */
+
+/* console.log([10, 9, 100, 1].sort());
+console.log([10, 9, 100, 1].sort((a, b)=> a - b)); */
+
+console.log(['banana', 'Apple', 'cherry'].sort());
+console.log(['banana', 'Apple', 'cherry'].sort((a, b) => a.localeCompare(b)));
