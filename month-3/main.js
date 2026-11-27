@@ -160,6 +160,31 @@ console.log(backToObject) */
 /* localStorage.setItem('user', JSON.stringify({name: "Monirul", city:'Noida'}));
 console.log(JSON.parse(localStorage.getItem('user'))); */
 
-console.log(localStorage.getItem('koi-aisi-key-jo-hai-hi-nahi'));
+/* console.log(localStorage.getItem('koi-aisi-key-jo-hai-hi-nahi'));
 const saved = localStorage.getItem('koi-aisi-key-jo-hai-hi-nahi');
-console.log(JSON.parse(saved));
+console.log(JSON.parse(saved)); */
+/* localStorage.setItem('hell', JSON.stringify('Hello world'));
+const bad = JSON.parse(localStorage.getItem('hell'));
+console.log(bad) */
+
+/* const items = ['b', 'a', 'c'];
+const sorted = items.sort();
+console.log(items === sorted)
+console.log(items) */
+
+/* const list = [1, 2, 3];
+console.log(list.map(n => n * 2))
+console.log(list.map(n => {return n * 2}))
+console.log(list.map(n => {n * 2}))
+console.log(list.map(n => ({val:n}))) */
+
+/* console.log(JSON.stringify({ a: 1, b: undefined, c: null }));
+
+console.log(JSON.stringify({ price: null }), JSON.stringify({ price: undefined })); */
+
+/* function handleSave(n){
+  console.log('chala, n=', n);
+}
+
+const btn = document.querySelector('#theme');
+btn.addEventListener('click', () => handleSave(5)) */
