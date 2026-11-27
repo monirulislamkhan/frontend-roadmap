@@ -134,5 +134,125 @@ console.log([...s]); */
 /* console.log([10, 9, 100, 1].sort());
 console.log([10, 9, 100, 1].sort((a, b)=> a - b)); */
 
-console.log(['banana', 'Apple', 'cherry'].sort());
-console.log(['banana', 'Apple', 'cherry'].sort((a, b) => a.localeCompare(b)));
+/* console.log(['banana', 'Apple', 'cherry'].sort());
+console.log(['banana', 'Apple', 'cherry'].sort((a, b) => a.localeCompare(b))); */
+
+/* console.log(['apple', 'Banana', 'cherry'].sort());
+console.log(['apple', 'Banana', 'cherry'].sort((a, b) => a.localeCompare(b))); */
+
+// concept :flat
+/* const tags = [['php', 'css'], ['js'], ['html', 'scss']];
+console.log(tags.flat().length); */
+
+
+
+/* localStorage.setItem('user', JSON.stringify({name: "Project Name", city:"Noida"}));
+console.log(JSON.parse(localStorage.getItem('user'))); */
+
+/* const settings = {theme:'dark', fontSize:16};
+const asText = JSON.stringify(settings);
+localStorage.setItem('settings', asText);
+
+const textBack = localStorage.getItem('settings');
+const backToObject = JSON.parse(textBack)
+console.log(backToObject) */
+
+/* localStorage.setItem('user', JSON.stringify({name: "Monirul", city:'Noida'}));
+console.log(JSON.parse(localStorage.getItem('user'))); */
+
+/* console.log(localStorage.getItem('koi-aisi-key-jo-hai-hi-nahi'));
+const saved = localStorage.getItem('koi-aisi-key-jo-hai-hi-nahi');
+console.log(JSON.parse(saved)); */
+/* localStorage.setItem('hell', JSON.stringify('Hello world'));
+const bad = JSON.parse(localStorage.getItem('hell'));
+console.log(bad) */
+
+/* const items = ['b', 'a', 'c'];
+const sorted = items.sort();
+console.log(items === sorted)
+console.log(items) */
+
+/* const list = [1, 2, 3];
+console.log(list.map(n => n * 2))
+console.log(list.map(n => {return n * 2}))
+console.log(list.map(n => {n * 2}))
+console.log(list.map(n => ({val:n}))) */
+
+/* console.log(JSON.stringify({ a: 1, b: undefined, c: null }));
+
+console.log(JSON.stringify({ price: null }), JSON.stringify({ price: undefined })); */
+
+/* function handleSave(n){
+  console.log('chala, n=', n);
+}
+
+const btn = document.querySelector('#theme');
+btn.addEventListener('click', () => handleSave(5)) */
+
+/* const nested = [1, 2, [3,4], [5, 6]];
+console.log(nested.flat()) */
+
+/* const deep = [1, [2, [3, [4]]]]
+console.log(deep.flat())
+console.log(deep.flat(2))
+console.log(deep.flat(Infinity)) */
+
+/* const tags = [['php', 'css'], ['js'], ['html', 'scss']];
+console.log(tags.flat().length); */
+
+const posts = [
+  { title: 'A', tags: ['php', 'css'] },
+  { title: 'B', tags: ['js'] },
+  { title: 'C', tags: ['html', 'scss'] }
+];
+
+/* const map = posts.map(item => item.tags)
+const flatMap = posts.flatMap(item => item.tags)
+console.log(map)
+console.log(flatMap) */
+/* const allUniqueTags = [...new Set(posts.flatMap(item => item.tags))].sort()
+console.log(allUniqueTags) */
+
+// CAH077236811626
+
+/* const list = ['a', 'b'];
+list.push('c')
+console.log(list)
+const bigger = [...list, 'd']
+console.log(bigger) */
+
+/* const list = ['a', 'b'];
+const result = list.push('c')
+console.log(list) */
+
+/* const a = ['x', 'y'];
+a.push('z');
+console.log(a) */
+
+/* const b = ['x', 'y'];
+const c= [...b,'z']
+console.log(b, c) */
+
+/* localStorage.setItem('city', 'Kolkata')
+localStorage.getItem('city');
+localStorage.removeItem('city') */
+
+/* localStorage.setItem('user', JSON.stringify({name: "Monirul", city:'Noida'}));
+const backToObject = JSON.parse(localStorage.getItem('user'));
+console.log(backToObject.city)  */             
+
+/* const nums = [1,2,3];
+const result = nums.map(n => console.log(n));
+console.log(result) */
+
+/* const list = [5, 10, 2];
+const filtered = list.filter(n => n>4)
+console.log(filtered) */
+
+/* const nums = [1, 2, 3,4,5,6,7,8,9,10]
+const result = nums.map(n => `3 X ${n} = ${n*3}`)
+console.log(result) */
+
+localStorage.setItem('gandi-cheez', 'hello world');
+const bad = localStorage.getItem('gandi-cheez');
+console.log(JSON.parse(bad))
